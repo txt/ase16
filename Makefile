@@ -24,6 +24,6 @@ timm:
 	@git config --global user.email tim.menzies@gmail.com
 
 prep:
-	$(foreach,f,$F, \
-		gawk etc/headers.awk $f > .tmp; \
-		mv .tmp $; )
+	@$(foreach f,$F,                    \
+    gawk -f etc/headers.awk $f > .tmp; \
+    mv .tmp $f; )
