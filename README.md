@@ -7,6 +7,6 @@
 [Lecturer](http://menzies.us) 
 
 
-# asddsa
+# Home
 
 asdaa
