@@ -1,3 +1,5 @@
+F=$(shell find . -name '*.md')
+
 typo:  ready
 	@- git status
 	@- git commit -am "saving"
@@ -20,3 +22,8 @@ gitting:
 timm:
 	@git config --global user.name "Tim Menzies"
 	@git config --global user.email tim.menzies@gmail.com
+
+prep:
+	$(foreach,f,$F, \
+		gawk etc/headers.awk $f > .tmp; \
+		mv .tmp $; )
