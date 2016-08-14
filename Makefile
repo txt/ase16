@@ -13,7 +13,7 @@ commit:  ready
 update:; @- git pull origin master
 status:; @- git status
 
-ready: gitting
+ready: gitting prep
 
 gitting:
 	@git config --global credential.helper cache
