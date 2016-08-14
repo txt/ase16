@@ -18,12 +18,13 @@ ready: gitting prep
 gitting:
 	@git config --global credential.helper cache
 	@git config credential.helper 'cache --timeout=3600'
+	@git config --global user.email tim.menzies@gmail.com
 
 timm:
 	@git config --global user.name "Tim Menzies"
-	@git config --global user.email tim.menzies@gmail.com
 
 prep:
-	@$(foreach f,$F,                    \
-    gawk -f etc/headers.awk $f > .tmp; \
-    mv .tmp $f; )
+	@$(foreach f,$F, if [ "etc/header" -nt "$f" ]; then echo "# updating $f ... "; gawk -f etc/headers.awk $f > .tmp; mv .tmp $f; fi; )
+
+prepping:
+	@$(foreach f,$F, echo "# updating $f ... "; gawk -f etc/headers.awk $f > .tmp; mv .tmp $f;  )
