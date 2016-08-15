@@ -44,8 +44,8 @@ width=100>
        + **Do not use** this number, except in the most dire of 
           circumstances (best way to contact me is via email).
 
-**GTA:** George Micheal <img
-src="../img/gm.png"
+**GTA:** George Mathew <img
+src="https://avatars0.githubusercontent.com/u/5582924?v=3&s=460"
 align=right
 width=100>
 
