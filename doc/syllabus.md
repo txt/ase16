@@ -49,7 +49,7 @@ src="../img/gm.png"
 align=right
 width=100>
 
-+ E-mail: 	george.meg91@gmail.com
++ E-mail: 	george2@ncsu.edu
   + Only use this email for private matters. All other class communication should be via the class news group,    listed below.
 + Office hours: 2-4 on Wednesdays and by appointment on other days.
 + Office location: rm 3231, EE II
