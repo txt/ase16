@@ -2,11 +2,10 @@
 [Home](http://tiny.cc/ase2016) |
 [At a glance...](https://github.com/txt/ase16/blob/master/doc/glance.md) |
 [Syllabus](https://github.com/txt/ase16/blob/master/doc/syllabus.md) |
-[Submit](http://tiny.cc/ase2016give) |
+[Submit](http://tiny.cc/ase16give) |
 [Discuss](https://ase16.slack.com/) |
 [Lecturer](http://menzies.us) |
 [&copy; 2016](https://github.com/txt/ase16/blob/master/LICENSE.md) tim@menzies.us
-
 
 
 # Lecture 1: What, Why, Model-Based Automated Software Engineering?
