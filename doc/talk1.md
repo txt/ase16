@@ -8,9 +8,9 @@
 [&copy; 2016](https://github.com/txt/ase16/blob/master/LICENSE.md) tim@menzies.us
 
 
-# Lecture 1: What, Why, Model-Based Automated Software Engineering?
+# Lecture 1: What, Why, Model-Based Automated Software Engineering? <img src="../img/class.png" align=right>
 
-<img src="../img/class.png" align=right>
+
 
 
 
