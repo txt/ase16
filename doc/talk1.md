@@ -1,3 +1,12 @@
+[<img width=900 src="https://raw.githubusercontent.com/txt/ase16/master/img/mase16.png">](http://tiny.cc/ase2016)   
+[Home](http://tiny.cc/ase2016) |
+[At a glance...](https://github.com/txt/ase16/blob/master/doc/glance.md) |
+[Syllabus](https://github.com/txt/ase16/blob/master/doc/syllabus.md) |
+[Submit](http://tiny.cc/ase2016give) |
+[Discuss](https://ase16.slack.com/) |
+[Lecturer](http://menzies.us) |
+[&copy; 2016](https://github.com/txt/ase16/blob/master/LICENSE.md) tim@menzies.us
+
 
 
 # Lecture 1
@@ -190,11 +199,11 @@ better undestandng of some phenomenon.
 **Be employed!! For decades to come!!:**
 This subject will make you  be the world's greatest Python programmer.  And that is no bad thing:
 
-![Python pop](http://edge.alluremedia.com.au/m/l/2014/02/codeeval2014.jpg)
+![Python pop](http://static1.squarespace.com/static/51361f2fe4b0f24e710af7ae/t/56b1187d4c2f85efc5598bb1/1454446752995/)
 
-![Python salaries](http://www.gobrightwing.com/wp-content/uploads/2015/03/programming-languages.jpg)
+![Python salaries](https://s3.amazonaws.com/codementor_content/2016-Feb/salaryrange.png)
 
-![Python job growth](img/RelativeGrowthPython.png)
+![Python job growth](../img/python.png)
 
 
 But also, this subject could also help you stay ahead of the game for decades to come.
