@@ -57,7 +57,73 @@ impacts".
   wild and fantastic and profound ideas,
   then [you should also study MASE](#ideas).
 
-## <a name=science>Be an Agile Research Programming</a>
+### <a name=career>Career Security</a>
+
+**Be Ahead of the Curve!:** What is the next "big
+  thing" after "big data"? Well, after "data
+  collection" comes "model construction" so the next
+  big thing after big data will be "big
+  modeling". In this subject, students will learn
+  how to represent, execute, and reason about
+  models. Our case studies will come from software
+  engineering but the principles of this subject
+  could be applied to models in general.
+
+**Be employed!! For decades to come!!:**
+This subject will make you  be the world's greatest Python programmer.  And that is no bad thing:
+
+![Python pop](http://static1.squarespace.com/static/51361f2fe4b0f24e710af7ae/t/56b1187d4c2f85efc5598bb1/1454446752995/)
+
+![Python salaries](https://s3.amazonaws.com/codementor_content/2016-Feb/salaryrange.png)
+
+![Python job growth](../img/python.png)
+
+
+But also, this subject could also help you stay ahead of the game for decades to come.
+
+### Ahead of the Game
+
+**Be a Stats Guru**:
+MASE requires that we know better ways to understand
+complex Phenomena.  
+Hence, skilled practitioners of MASE, know 
+much about practical, fast, large-scale statistical methods. 
+
+**Be a Better Scientist:**
+MASE is an excellent way
+ hone your skills as a scientist as well as
+your critical thinking prowess.
+MASE teaches us much  about
+empirical methods and how to sample and test complex
+phenomena. For example, MASE practitioners
+  understand the
+_variability_ of any conclusion made by any
+scientific method (e.g. when someone
+offers  a conclusion, the experienced MASE programmer
+always be "yes, but how
+brittle is that conclusion to changes in
+conditions?").  
+
+**Be More Agile:** 
+Humans learn best (and fastest)
+via feedback from direct feedback from the
+domain. That is is true of agile software
+development as well as something else I want to call
+_agile research programming_:
+
++ The research programmer tackles problems at a much
+higher level than a programmer.  
++ While agile
+programmers debug string functions, agile scientists
+debug theories.
+
+As such, the agile research programmers tests ideas
+more and changes their mind more as they evolve a
+better undestandng of some phenomenon.
+
+
+
+### <a name=science>Be an Agile Research Programming</a>
 
 Research programming is 
 the future of SE. 
@@ -144,69 +210,8 @@ builds and explores models-- which can be a complex
 process that this subject aims to simplify.
 
 
-**Be a Stats Guru**:
-MASE requires that we know better ways to understand
-complex Phenomena.  
-Hence, skilled practitioners of MASE, know 
-much about practical, fast, large-scale statistical methods. 
-
-**Be a Better Scientist:**
-MASE is an excellent way
- hone your skills as a scientist as well as
-your critical thinking prowess.
-MASE teaches us much  about
-empirical methods and how to sample and test complex
-phenomena. For example, MASE practitioners
-  understand the
-_variability_ of any conclusion made by any
-scientific method (e.g. when someone
-offers  a conclusion, the experienced MASE programmer
-always be "yes, but how
-brittle is that conclusion to changes in
-conditions?").  
-
-**Be More Agile:** 
-Humans learn best (and fastest)
-via feedback from direct feedback from the
-domain. That is is true of agile software
-development as well as something else I want to call
-_agile research programming_:
-
-+ The research programmer tackles problems at a much
-higher level than a programmer.  
-+ While agile
-programmers debug string functions, agile scientists
-debug theories.
-
-As such, the agile research programmers tests ideas
-more and changes their mind more as they evolve a
-better undestandng of some phenomenon.
 
 
-
-## <a name=career>Career Security</a>
-
-**Be Ahead of the Curve!:** What is the next "big
-  thing" after "big data"? Well, after "data
-  collection" comes "model construction" so the next
-  big thing after big data will be "big
-  modeling". In this subject, students will learn
-  how to represent, execute, and reason about
-  models. Our case studies will come from software
-  engineering but the principles of this subject
-  could be applied to models in general.
-
-**Be employed!! For decades to come!!:**
-This subject will make you  be the world's greatest Python programmer.  And that is no bad thing:
-
-![Python pop](http://static1.squarespace.com/static/51361f2fe4b0f24e710af7ae/t/56b1187d4c2f85efc5598bb1/1454446752995/)
-
-![Python salaries](https://s3.amazonaws.com/codementor_content/2016-Feb/salaryrange.png)
-
-![Python job growth](../img/python.png)
-
-
-But also, this subject could also help you stay ahead of the game for decades to come.
 
 ##  <a name=ideas>MASE and the Future of Ideas</a>
 
