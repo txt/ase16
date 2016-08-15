@@ -15,7 +15,7 @@ the wide wild   world of _Research Programming_:
 + Step 1: codify your current understanding of "it" into a model.   
 + Step 2: reason about that model.
 
-![Brooks](img/brookslaw.png)
+![Brooks](https://github.com/txt/mase/raw/master/img/brookslaw.png)
 
 <img align=right width=250 src="https://raw.githubusercontent.com/txt/mase/master/img/dna.png"> 
 MASE changes the nature and focus and role of
