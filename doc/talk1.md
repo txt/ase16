@@ -9,7 +9,7 @@
 
 
 
-# Lecture 1
+# Lecture 1: What, Why, Model-Based Automated Software Engineering
 
 <img src="../img/class.png" align=right>
 
