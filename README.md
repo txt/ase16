@@ -54,7 +54,11 @@ of search-based optimization for exploring models
      <td valign=top  xwidth="100px">
 
 
-     </td><td valign=top xwidth="100px">
+</td><td valign=top xwidth="100px">
+
+1. <a href="doc/talk1.md">About MASE</a><br>
+0. <a href="doc/reading12345678.md">Reading12345678</a>
+
      </td><td valign=top xwidth="100px">
 
      </td><td valign=top><small>
