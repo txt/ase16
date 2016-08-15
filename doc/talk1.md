@@ -43,6 +43,8 @@ we explore **BIG** things like String Theory or
 "hello world model of climate change and economic
 impacts".
 
+___
+
 ## Why Study MASE?
 
 + If you interested in general methods 
@@ -79,6 +81,8 @@ This subject will make you  be the world's greatest Python programmer.  And that
 
 
 But also, this subject could also help you stay ahead of the game for decades to come.
+
+
 
 ### Ahead of the Game
 
@@ -210,7 +214,7 @@ process that this subject aims to simplify.
 
 
 
-
+_____
 
 ##  <a name=ideas>MASE and the Future of Ideas</a>
 
