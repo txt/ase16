@@ -63,6 +63,7 @@ For more details see [Reading12345678](Reading12345678.md).
 
 ### Get your Test-Driven Development On.
 
+
 1. Watch the great [Kent Beck video on how to write a test engine in just a few lines of code](https://www.youtube.com/watch?v=nIonZ6-4nuU). Note
 that that example is in CoffeeScript. For the equivalent Python code, see
 [utest.py](../src/utest.py).
@@ -78,7 +79,7 @@ that that example is in CoffeeScript. For the equivalent Python code, see
 6. Add one more unittest to `main.py`.
      + Important... leave behind at least one failing test.
      + Save the file. Watch the code run.
-
+ 
 ____
 
 ## Working with Cloud9
