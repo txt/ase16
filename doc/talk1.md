@@ -8,6 +8,8 @@
 [Lecturer](http://menzies.us) |
 [&copy; 2016](https://github.com/txt/ase16/blob/master/LICENSE.md) tim@menzies.us
 
+______
+
 
 # <img src="../img/class.png" align=right> Lecture 1: What, Why, Model-Based Automated Software Engineering? 
 

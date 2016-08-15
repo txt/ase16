@@ -8,6 +8,8 @@
 [Lecturer](http://menzies.us) |
 [&copy; 2016](https://github.com/txt/ase16/blob/master/LICENSE.md) tim@menzies.us
 
+______
+
 
 # At a glance...
 
