@@ -3,7 +3,7 @@
 utest.py (c) 2016 tim@menzies.us, MIT licence
 
 Part of http://tiny.cc/ase16: teaching tools for
-automated software enginering
+(model-based) automated software enginering.
 
 USAGE: 
 (1) If you place '@ok' before a function, then

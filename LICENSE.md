@@ -1,3 +1,4 @@
+<em>"Because engineering is optimiztion and optimization is search."</em><br>
 [<img width=900 src="https://raw.githubusercontent.com/txt/ase16/master/img/mase16.png">](http://tiny.cc/ase2016)   
 [Home](http://tiny.cc/ase2016) |
 [At a glance...](https://github.com/txt/ase16/blob/master/doc/glance.md) |
@@ -9,6 +10,7 @@
 [&copy; 2016](https://github.com/txt/ase16/blob/master/LICENSE.md) tim@menzies.us
 
 ______
+
 
 # License
 
