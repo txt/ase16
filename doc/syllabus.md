@@ -1,4 +1,4 @@
-<a href="http://tiny.cc/ase2016"><img border=0 src="https://www.bayada.com/images/social/home.png"></a><br>
+[home](http://tiny.cc/ase16)<br>
 [<img width=900 src="https://raw.githubusercontent.com/txt/ase16/master/img/mase16.png">](http://tiny.cc/ase2016)<br>
 [overview](https://github.com/txt/ase16/blob/master/doc/overview.md) |
 [syllabus](https://github.com/txt/ase16/blob/master/doc/syllabus.md) |
