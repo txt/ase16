@@ -1,4 +1,21 @@
 #!/usr/bin/python
+"""
+utest.py (c) 2016 tim@menzies.us, MIT licence
+
+Part of http://tiny.cc/ase16: teaching tools for
+automated software enginering
+
+USAGE: 
+(1) If you place '@ok' before a function, then
+load that file, then that function will execute and
+all assertion failures will add one to a FAIL
+count.
+(2) To get the final counts, add 'oks()' at the end
+of the source code.
+
+For more on this kind of tool, see
+https://www.youtube.com/watch?v=nIonZ6-4nuU
+"""
 from __future__ import division,print_function
 import sys,re,traceback,random
 sys.dont_write_bytecode=True
@@ -67,4 +84,5 @@ def _any3():
   for k,v in seen.items():
     assert v < 2
   print("")
-  
+ 
+oks()
