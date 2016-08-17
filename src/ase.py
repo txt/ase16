@@ -914,7 +914,7 @@ def div(lst,label=0, x= same, y= same, yKlass= Num):
                     cut,score= i,score1
                   else:
                     k0,e0,ke0 = yrhs.k(), yrhs.ent(), ke(yrhs)
-                    gain   = k0 - score1
+                    gain   = e0 - score1
                     delta  = math.log(3**k0-2,2)-(ke0- ke(yrhs)-ke(ylhs))
                     border = (math.log(n-1,2) + delta)/n
                     if gain >= border:
