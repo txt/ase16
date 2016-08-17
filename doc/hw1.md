@@ -61,7 +61,7 @@ to show that you have a _power platform_ for Python development:
 ## Read Something
 
 Write a summary of one research paper from 2012 relating to automated software engineering
-For more details see [Reading12345678](Reading12345678.md).
+For more details see [Reading12345678](reading12345678.md).
 
 ## Code Something
 
