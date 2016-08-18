@@ -1,4 +1,4 @@
-[home](http://tiny.cc/ase16) |
+[home](http://tiny.cc/ase2016) |
 [copyright](https://github.com/txt/ase16/blob/master/LICENSE.md) &copy;2016, tim&commat;menzies.us
 <br>
 [<img width=900 src="https://raw.githubusercontent.com/txt/ase16/master/img/mase16.png">](http://tiny.cc/ase2016)<br>
@@ -123,7 +123,7 @@ Grades will be added together using:
 + Paper (on the software science): 15
 + Big project (on automated SE): 23 (essay) 7 (presentation)
 
-The mid-term exam will be on Wed Oct 12 (1 hour, rest of class canceled).
+The mid-term exam will be on Tues Oct 11 (1 hour, rest of class canceled).
 
 The final exam will be held on Tuesday December 13 during class time [check](https://studentservices.ncsu.edu/calendars/exam/).
 
