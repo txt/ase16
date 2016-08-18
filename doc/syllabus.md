@@ -123,7 +123,7 @@ Grades will be added together using:
 + Paper (on the software science): 15
 + Big project (on automated SE): 23 (essay) 7 (presentation)
 
-The mid-term exam will be on Wed Oct 12 (1 hour, rest of class canceled).
+The mid-term exam will be on Tues Oct 11 (1 hour, rest of class canceled).
 
 The final exam will be held on Tuesday December 13 during class time [check](https://studentservices.ncsu.edu/calendars/exam/).
 
