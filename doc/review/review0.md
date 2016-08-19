@@ -14,7 +14,7 @@ ______
 
 # Review-0
 
-### Lecture Date : 07/18/2016
+### Lecture Date : 08/18/2016
 
 ## Theory
 ______
