@@ -19,7 +19,7 @@ ______
 Everyone on the team should ahve the **same** indent policies in their IDE
 
 - Menzies: 2 spaces, "tab" injects 2 spaces.
-- Mathew: ??
+- Mathew: 2 spaces, "tab" injects 2 spaces.
 
 ## Style matters
 
