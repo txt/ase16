@@ -20,6 +20,11 @@ Don't matter what, but all members of the team should use the same style guideli
 - e.g. Style guide: http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html
 
 
+## Other tips
+
++ [Search Stackoverflow.com](http://stackoverflow.com/questions/tagged/python?sort=votes&pageSize=15)
++ [TOP 10 PYTHON CODING TIPS FOR BEGINNERS](http://www.techbeamers.com/top-10-python-coding-tips-for-beginners/)
++ [0 Neat Python Tricks Beginners Should Know](https://www.codementor.io/python/tutorial/python-tricks-for-beginners)
 
 
 
