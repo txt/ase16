@@ -3,6 +3,8 @@ from __future__ import division,print_function
 import sys,re,random,argparse,traceback,time,math,copy,pprint
 from functools import wraps
 from collections import defaultdict
+from pom3.pom3 import pom3
+from xomo.cocomo import Cocomo
 sys.dont_write_bytecode=True
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -478,22 +480,22 @@ class About1number(Pretty):
     return True
 
 class About1symbol(Pretty):
-  def __init__(txt,*lst,**d):
+  def __init__(i,txt,*lst,**d):
     i.txt = txt
     for x in lst:
       d[x] = 1
     i.n, i.bias=0,[]
     for x in d: 
-      n    += d[x]
+      i.n    += d[x]
       i.bias += [(d[x],x)]
     i.bias  = sorted(i.bias, reverse=True)
   def __call__(i):
     z = r()
-    for feq,thing in bias:
-      z -= freq/n
+    for freq,thing in i.bias:
+      z -= freq/i.n
       if z <= 0:
         return thing
-    return bias[-1][0]
+    return i.bias[-1][0]
   def norm(i,x)  : return x
   def wrap(i,x)  : return x
   def cap(i,x)   : return x
@@ -574,7 +576,6 @@ class Fonseca(Abouts):
                for col in i._decs])
       return 1 - math.e**(-1*z)
     def f2(row):
-      
       z = sum([( row[col.pos] + 1/math.sqrt(Fonseca.n))**2
                for col in i._decs])
       return 1 - math.e**(-1*z)
@@ -631,11 +632,78 @@ class DTLZ6(Abouts):
       row[i.ndecs + pos] = f[pos]
     return row
   def defObj(i,j):
-    return lambda row: i.objs(row)[i.ndecs + n ]
+    return lambda row: i.objs(row)[i.ndecs + j ]
   def abouts(i):
     return i.ready(decs = [N(str(n)) for n in xrange(i.ndecs)],
                     objs = [N("<f%s" % n, lo=0,up=25, get=i.defObj(n))
                            for n in xrange(i.nobjs)])
+
+def POM3A(): return POM3("a")
+def POM3B(): return POM3("b")
+def POM3C(): return POM3("c")
+def POM3D(): return POM3("d")
+
+class POM3(Abouts):
+  """
+  POM3 software engineering model. Has 4 versions (POM3A, POM3B, POM3C & POM3D)
+  """
+  decNames = ["Culture", "Criticality", "Criticality Modifier",
+              "Initial Known", "Inter-Dependency", "Dynamism",
+             "Size", "Plan", "Team Size"]
+  p3 = pom3()
+  def __init__(i, version="a"):
+    if version == "a":
+      i.decLows = [0.1, 0.82, 2, 0.40, 1, 1, 0, 0, 1]
+      i.decHighs = [0.9, 1.20, 10, 0.70, 100, 50, 4, 5, 44]
+    elif version == "b":
+      i.decLows = [0.10, 0.82, 80, 0.40, 0, 1, 0, 0, 1]
+      i.decHighs = [0.90, 1.26, 95, 0.70, 100, 50, 2, 5, 20]
+    elif version == "c":
+      i.decLows = [0.50, 0.82, 2, 0.20, 0, 40, 2, 0, 20]
+      i.decHighs = [0.90, 1.26, 8, 0.50, 50, 50, 4, 5, 44]
+    elif version == "d":
+      i.decLows = [0.10, 0.82, 2, 0.60, 80, 1, 0, 0, 10]
+      i.decHighs = [0.20, 1.26, 8, 0.95, 100, 10, 2, 5, 20]
+    else:
+      raise RuntimeError("Invalid version of POM : %s"%version)
+    i.ndecs = len(POM3.decNames)
+    i.nobjs = 4
+    Abouts.__init__(i)
+  def objs1(i,row):
+    for pos, x in enumerate(POM3.p3.simulate(row[:i.ndecs])):
+      row[i.ndecs + pos] = x
+    return row
+  def defObj(i, j):
+    return lambda row: i.objs(row)[i.ndecs + j]
+  def abouts(i):
+    return i.ready(decs = [N(name, low, high) for name, low, high in
+                                  zip(POM3.decNames, i.decLows, i.decHighs)],
+                   objs = [N("<Cost", 0, 10000), N(">Score", 0, 1),
+                           N(">Completion", 0, 1), N("<Idle", 0, 1)])
+
+class XOMO(Abouts):
+  """
+  XOMO - Flight control software represented in COCOMO
+  """
+  cocomo = Cocomo()
+  def __init__(i):
+    i.ndecs = len(XOMO.cocomo.about())
+    i.nobjs = 4
+    Abouts.__init__(i)
+  def objs1(i,row):
+    decs = {}
+    for name, n in zip(XOMO.cocomo.about(), range(i.ndecs)):
+      decs[name.txt] = int(round(n))
+    for pos, x in enumerate(XOMO.cocomo.xys(decs)):
+      row[i.ndecs + pos] = x
+    return row
+  def defObj(i, j):
+    return lambda row: i.objs(row)[i.ndecs + j]
+  def abouts(i):
+    return i.ready(decs = [N(one.txt, one.min, one.max) for one in XOMO.cocomo.about()],
+                   objs = [N("<effort", 0, 43000), N("<months", 0, 120),
+                           N("<defects", 0, 1180000), N("<risk", 0, 17)])
+
 
 def wrap(x,col): return col.wrap(x)
 def cap(x,col):  return col.cap(x)
@@ -1414,6 +1482,20 @@ def _Viennet4():
   print(s2.lo,s2.up)
   
   print(s3.lo,s3.up)
+
+@ok
+def _POM3():
+  rseed()
+  f = POM3()
+  for _ in xrange(10):
+    print(f.decsObjs())
+
+@ok
+def _XOMO():
+  rseed()
+  f = XOMO()
+  for _ in xrange(10):
+    print(f.decsObjs())
 
 @ok
 def _bdom():
