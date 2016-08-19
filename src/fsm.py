@@ -60,8 +60,8 @@ class Machine(Pretty):
     i.states[txt] = tmp
     return tmp
   def trans(i,*lst):
-    for arc in lst:
-      arc.here.out += [arc]
+    for one in lst:
+      arc.here.out += [one]
   def run(i,seed = 1):
    random.seed(seed)
    w,here=o(), i.states["entry"]
