@@ -567,7 +567,37 @@ class Abouts(Pretty):
     for row in rows:
       tbl(row.contents)
     return tbl
+
+class Pom3(Abouts):
+  import pom3
+  def abouts(i):
+    def f1(row):
+      row[10:] = pom3().simulate(row[0:9])
+      return row[10]
+    def f2(row): return row[11]
+    def f3(row): return row[12]
+    def f4(row): return row[13]
+    return i.ready(
+      decs=[
+            N('culture',              lo=0.1 ,up=0.9),
+            N('criticality',          lo=0.82,up=1.26),
+            N('criticality_modifier', lo=0.02,up=0.95),
+            N('initial_known',        lo=0.2 ,up=0.7),
+        N('interdependency',      lo=0   ,up=50),
+        N('dynamism',             lo=1   ,up=50),
+        N('size',                 lo=3   ,up=300),
+        N('plan',                 lo=0   ,up=1),
+        N('team_size',            lo=1   ,up=44)],
+      objs= [
+        N("<cost",       get= f1),
+        N(">score",      get= f2),
+        N(">completion", get= f3),
+        N("<idle",       get= f4)])
+
   
+                           
+
+      
 class Fonseca(Abouts):
   n=3
   def abouts(i):
@@ -1571,7 +1601,12 @@ def _igds():
     print("\n",what)
     for report in reports:
       print(report)
-      
+
+def _pom3():
+  p=Pom3().decsObjs()
+
+#_pom3()
+  
 if THE.run:
   f= eval("lambda : %s()" %THE.run)
   ok(f())
