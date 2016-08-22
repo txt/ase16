@@ -27,8 +27,8 @@ ______
      Please click here in order to veiw the training video. It will take about 50 seconds to load.</em>
    - Click on the "here" and watch the 25 minute video
 - Answer these questions
-- List two things _not_ to do during an active shooter event.
-- List two things _best_ to do during an active shooter event.
+    - List two things _not_ to do during an active shooter event.
+    - List two things _best_ to do during an active shooter event.
 
 
 ## Write Your First Learner: ZeroR
