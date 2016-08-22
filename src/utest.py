@@ -17,7 +17,7 @@ For more on this kind of tool, see
 https://www.youtube.com/watch?v=nIonZ6-4nuU
 """
 from __future__ import division,print_function
-import sys,re,traceback,random
+import sys,re,traceback,random,string
 sys.dont_write_bytecode=True
 
 PASS=FAIL=0
@@ -77,7 +77,7 @@ def _any3():
   """There are 2600 three letter alphanet combinations.
      So if we pick just 10, there should be no repeats."""
   random.seed(1)
-  lst=list('abcdefghijklmnopqrstuvwxyz')
+  lst=list(string.ascii_lowercase) # abcdefghijklmnopqrstuvwxyz
   seen = {}
   for x in sorted([''.join(any3(lst)) for _ in xrange(10)]):
     seen[x] = seen.get(x,0) + 1
