@@ -54,7 +54,7 @@ Don't matter what, but all members of the team should use the same style guideli
     - [Emacs](https://www.emacswiki.org/emacs/PythonProgrammingInEmacs)
     - [Vim](https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/)
   - Useful for working on remote file system
-
+- Share other suggestions on slack
 
 ## Other tips
 
