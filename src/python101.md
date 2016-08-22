@@ -54,8 +54,8 @@ E.g. for all non-blank lines do:
 def csvRows(file):
   with open(file) as fs:
     for line in fs:
-       line = re.sub(r'([\n\r\t]|#.*)', # kill white space
-                    "", line)
+        line = re.sub(r'([\n\r\t]|#.*)', # kill white space
+                      "", line)
         cells = line.split(",")  # split ","
         row = map(lambda z:z.strip(), cells) # zap wrapping white space
         if len(row)> 0:
