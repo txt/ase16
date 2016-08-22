@@ -4,7 +4,7 @@ import sys,random,os
 sys.dont_write_bytecode=True
 
 # usage:
-#   python fsm.py 16045 # for a long-ish run
+#   python fsm.py 21083 # for a long-ish run
 #   python fsm.py 1     # for a short run
 
 #----------------------------------------------
@@ -52,6 +52,16 @@ class State(Pretty):
   def __init__(i,name): i.name, i.out, i.visits = name,[],0
   def stop(i)         : return i.name[-1] == "."
   def looper(i)       : return i.name[0] == "#"
+  def arrive(i):
+    print(i.name)
+    if not i.looper():
+      i.visits += 1
+      assert i.visits <= 5, 'loop detected'
+  def next(i,w):
+    for tran in shuffle(i.out):
+        if tran.gaurd(w,tran):
+          return tran.there
+    return i
   
 class Trans(Pretty):
   def __init__(i,here,gaurd,there):
@@ -74,20 +84,16 @@ class Machine(Pretty):
   def run(i,seed = 1):
    print('#', seed)
    random.seed(seed)
-   w,here=o(), i.first #states["entry"]
+   w, here = o(), i.first 
    while True:
-     print(here.name)
-     if not here.looper():
-       here.visits += 1
-     if here.stop(): return w
-     if here.visits > 5: return w
-     for arc in shuffle(here.out):
-        if arc.gaurd(w,arc):
-          here = arc.there
-          break
+     here.arrive()
+     if here.stop():
+       return w
+     else:
+       here = here.next(w)
 
 if __name__ == '__main__':
   if len(sys.argv)>1:
-     fsm0().run(sys.argv[1])
+     fsm0().run(int(sys.argv[1]))
   else:
      fsm0().run()
