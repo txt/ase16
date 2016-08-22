@@ -15,10 +15,12 @@ lets us teach model-based methods to newbs.
 - or set as variables in _lambda_ bodies.
 - Strings can be simple, or multi-line
 
-     """
-     Multi-line 
-     string
-     """
+For example:
+
+      """
+      Multi-line 
+      string
+      """
 
 - Functions:
       - inputs: args, defaults, variable length arguments `\*l`, `\*\*d`
