@@ -25,24 +25,7 @@
     - List two things _not_ to do during an active shooter event.
     - List two things _best_ to do during an active shooter event.
 
-## Read for Class
-
-Take a large cup of coffee, drink it, then reflect on [fsm.py](../src/fsm.py). We will talk to this code in class.
-
-Note that [fsm.py](../src/fsm.py) implements a "domain-specific language" (DSL)
-for finite state machines (FSM) written in Python.
-
-Optional reading:
-
-- For more on DSLs, see
-     - http://martinfowler.com/bliki/DomainSpecificLanguage.html
-     - http://martinfowler.com/dslCatalog/index.html
- - For more on FSMs, see
-     - http://jessewarden.com/2012/07/finite-state-machines-in-game-development.html
-
-
 ## Introductory Python
-
 
 Read chapters one to four of [Think like a Computer Scientist](http://www.greenteapress.com/thinkpython/html/index.html)
 
@@ -59,3 +42,19 @@ Then do:
       + Yes, there is a full worked solution available, but try iut out yourself first.
       + In your directory, add figures `think4\_2.png`, `think4\_3.png` showing screen snaps generated from these figures.
 
+## Read for Class
+
+This part of the homework has _nothing_ to hand in.
+
+Take a large cup of coffee, drink it, then reflect on [fsm.py](../src/fsm.py). We will talk to this code in class.
+
+Note that [fsm.py](../src/fsm.py) implements a "domain-specific language" (DSL)
+for finite state machines (FSM) written in Python.
+
+Optional reading:
+
+- For more on DSLs, see
+     - http://martinfowler.com/bliki/DomainSpecificLanguage.html
+     - http://martinfowler.com/dslCatalog/index.html
+- For more on FSMs, see
+     - http://jessewarden.com/2012/07/finite-state-machines-in-game-development.html
