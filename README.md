@@ -64,7 +64,7 @@ of search-based optimization for exploring models
 
 </td><td valign=top xwidth="100px">
 
-2. <a href="doc/hw2.md">hw1</a><br>
+2. <a href="doc/hw2.md">hw2</a><br>
 1. <a href="doc/hw1.md">hw1</a>
 
      </td><td valign=top xwidth="100px">
