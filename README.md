@@ -58,6 +58,7 @@ of search-based optimization for exploring models
      <td valign=top  xwidth="100px">
 
 
+3. <a href="doc/pythontips.md">Python tips</a><br>
 2. <a href="src/python101.md">Some Python notes</a><br>
 1. <a href="doc/talk1.md">About MASE</a><br>
 0. <a href="https://github.com/txt/fss16/blob/master/doc/reading12345678.md">Reading12345678</a>
