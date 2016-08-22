@@ -10,9 +10,6 @@
 [chat](https://ase16.slack.com/) 
 
 
-______
-
-
 # Homework2
 
 ## Active Shooter Exercise.
@@ -30,7 +27,6 @@ ______
 
 ## Introductory Python
 
-## Instructions
 
 Read chapters one to four of [Think like a Computer Scientist](http://www.greenteapress.com/thinkpython/html/index.html)
 

@@ -35,7 +35,7 @@ etc
 
 - Get your development environment going. This should be:
        - code that is checked into git and saved,
-         regularly to your Gibhub account, and shared with any team members.
+         regularly to your Github account, and shared with any team members.
        - Some place where you can run Python 2.7.
        - Note that all your team members need to running the same environment (which makes
          c9.io an attractive option).
@@ -44,7 +44,7 @@ etc
   our random assignments to the teams. Ask for a change if NO ONE on your team is
   expert on the language you are using. If you make a change:
        - mark your people with the same letter in column C, BELOW Row 20
-       - add your Gibub url in column B ABOVE row 20
+       - add your Github url in column B ABOVE row 20
 
 Important note: For this subject, the lecturer and support will support your
 Python code on the intenet IDE [Cloud9](http://c9.io).  You can use any other
