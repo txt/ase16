@@ -32,6 +32,29 @@ Don't matter what, but all members of the team should use the same style guideli
 
 - e.g. Style guide: http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html
 
+## IDEs
+- [Pycharm](https://www.jetbrains.com/pycharm/)
+  - Extremely user friendly for beginners and experts
+  - Professional edition free with student mail id.
+  - Integration with PEP8 and standard style checkers
+  - Compatability with pip and anaconda package managers
+  - More [here](https://www.jetbrains.com/pycharm/features/)
+- [Eclipse with PyDev](http://www.pydev.org/)
+  - Open source
+  - Aids developers familiar with the eclipse ecosystem
+  - PEP8 style checker incorporated by default
+- [Notepad ++](https://notepad-plus-plus.org/)
+  - For windows users
+  - [Plugin](http://npppythonscript.sourceforge.net/)
+  - Lightweight
+  - Not recommended for beginners
+- [Emacs](https://www.gnu.org/software/emacs/) or [Vim](http://www.vim.org/)
+  - Classical text editors
+  - Plugins available for python formatting
+    - [Emacs](https://www.emacswiki.org/emacs/PythonProgrammingInEmacs)
+    - [Vim](https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/)
+  - Useful for working on remote file system
+
 
 ## Other tips
 
