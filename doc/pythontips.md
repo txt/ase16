@@ -54,6 +54,17 @@ Don't matter what, but all members of the team should use the same style guideli
     - [Emacs](https://www.emacswiki.org/emacs/PythonProgrammingInEmacs)
     - [Vim](https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/)
   - Useful for working on remote file system
+- [Ipython](https://ipython.org/)
+  - Interactive python by Junyper.
+  - Supports documentation as well as coding.
+  - Can be made Cloud based 
+  - Shareable
+  - Runs on your browser
+- [Cloud 9](https://c9.io/pricing)
+  - Cloud based programming
+  - Integration with git
+  - Package manager is simple and inbuilt.
+  - Free version has a decent amount of RAM for smaller projects. 
 - Share other suggestions on slack
 
 ## Other tips
