@@ -37,8 +37,7 @@ ______
   * decorators
   * exception handling
   
-2. Write a function that takes 2 args(Arg1 and Arg2) such that Arg 1 is a list of numbers, Arg2 is a number. Return a list of size Arg2 from Arg1 such that no duplicates are present.
-eg.
+2. Write a function that takes 2 args(Arg1 and Arg2) such that Arg 1 is a list of numbers, Arg2 is a number. Return a list of size Arg2 from Arg1 such that no duplicates are present. eg
 ```
 def func(arg1, arg2):
   do something
