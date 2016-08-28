@@ -19,6 +19,7 @@ class KnightsTour:
       x,y = x0+x1, y0+y1
       if 0 < x < i.x:
         if 0 < y < i.x:
+          print((x,y))
           if not b[x][y]:
             yield x,y
   def jump2(i,x0,y0,b):
