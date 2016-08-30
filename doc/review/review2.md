@@ -42,7 +42,7 @@ def items(x, depth=-1):
       for z in items(y, depth+1):
         yield z
   else:
-  yield _,x
+    yield _,x
 
 out = []
 for _,x in items(  [10,[ 20,30],
