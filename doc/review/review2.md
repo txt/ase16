@@ -141,9 +141,9 @@ You've seen the knightstour. Can you code up the 8 queens problem in python? (ht
 What is a finite state machine?
 Can you describe an fsm in python for the following problem.
 Your in a bar.
- 1) You start of sober.
- 2) If you are sober you take a drink
- 3) If You take a drink then there is a 80% of the time you get drunk and there is a 20% chance you pass out.
- 4) If you do not take a drink, there is a 50% chance you get sober.
- 5) If you pass out the machine stops
+ 1. You start of sober.
+ 2. If you are sober you take a drink
+ 3. If You take a drink then there is a 80% of the time you get drunk and there is a 20% chance you pass out.
+ 4. If you do not take a drink, there is a 50% chance you get sober.
+ 5. If you pass out the machine stops
 
