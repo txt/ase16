@@ -42,15 +42,15 @@ def items(x, depth=-1):
       for z in items(y, depth+1):
         yield z
   else:
-    yield _,x
+    yield x
 
 out = []
-for _,x in items(  [10,[ 20,30],
+for x in items(  [10,[ 20,30],
                         40,
                         [   (  50,60,70),
                             [  80,90,100],110]]):
    out += [x]
-return out
+print out
 ``` 
 
 1c. Repeat the above, this time using _list comprehensions_.
