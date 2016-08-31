@@ -66,7 +66,7 @@ string.whitespace # <== contains all whitespace chars
 1e. Using list comprehensions and the following code,
 return all lines in a multi-line
 strings that  are (a) non-blanks and (b) longer than 20
-lines. Hints: `not str` returns `True` for non empty strings.
+characters in length. Hints: `not str` returns `True` for non empty strings.
 
 ```python
 def lines(string):
