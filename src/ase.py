@@ -194,7 +194,7 @@ def atom(x)  :
   except:
     try: return float(x)
     except ValueError:
-      return Sym
+      return x
 
 def timeit(f,repeats=1):
   start = time.time()
