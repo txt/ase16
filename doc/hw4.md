@@ -18,14 +18,6 @@ ______
 # Homework4: Your First Optimizer
 
 
-## What to Hand in
-
-After doing all the following, you should 
-be able to write one source files into  `hw/code/4` along with
-screen snaps of your work (if relevant).
-
-Using some URL shortener (e.g. goo.gl), shorten the URL to `hw/code/4`
-and paste into [the submission page](https://goo.gl/lZEmEm).
 
 
 # Basic Simulated Annealing
@@ -35,17 +27,18 @@ Read the [lecture](talk3sa.md) on simulated annealing.
 Hack up a simulated annealer for the
 [Schaffer](pdf/moeaProblems.pdf) model.
 
-Do not be clever. This is throw away code. As quick
+- Do not be clever. This is throw away code. As quick
 and as dirty as you like.
+- Feel free to hardwire Schaffer into your code.
 
 To create neighbors, just mutate the single
 independent variable at each run.
 
 To compute energy, add the sum of the two _f1_, _f2_
- variables. Note that for the [lecture](SA.md) code to
+ variables. Note that for the [lecture](talk3sa.md) code to
  work, that sum has to be normalized 0..1. So
  conduct a _baseline_ study where you run the
- [Schaffer](models/moeaProblems.pdf) 100 times to
+ [Schaffer](pdf/moeaProblems.pdf) 100 times to
  find the min and max values for _f1 + f2_ . Take
  those numbers then hardwire the following
  normalization function:
