@@ -69,7 +69,7 @@ guidance and control etc meet for week-long sessions
 to thrash out possibilities for NASA's next deep
 space mission.
 
-<img src="http://jplteamx.jpl.nasa.gov/images/teamx/team.jpg">
+<img src="https://finalfrontierscience.files.wordpress.com/2015/09/teamx.jpg?w=960">
 
 
 In these meetings it is possible for groups sitting
