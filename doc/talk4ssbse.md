@@ -30,7 +30,11 @@ The human condition is a constant balancing act
 between vaguely understood, often competing,
 goals. For example:
 
-<img width=500 src="http://kirstenhan.me/wp-content/uploads/2012/08/Screen-shot-2012-08-11-at-AM-01.23.53-560x259.png">
+<img width=600 src="https://infoscience.epfl.ch/record/153674/files/34_2010_SimBuild%20GAoptimiz_1.png">
+
+![](../img/planes.png)
+
+<img width=600 src="http://image.slidesharecdn.com/multiobjectiveoptimizationandtradeoffsusingparetooptimality-110311200155-phpapp02/95/multiobjective-optimization-and-trade-offs-using-pareto-optimality-2-728.jpg?cb=1379983697">
 
 
 For another (software related) example:
