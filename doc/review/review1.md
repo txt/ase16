@@ -14,7 +14,7 @@ ______
 
 # Review-1
 
-### Lecture Date : 08/23/2016
+### Lecture Date : 08/23/2016 & 08/25/2016
 
 ## Theory
 ______
@@ -23,6 +23,8 @@ ______
 1. What is a decorator?
 1. What does a seed do in a random number generator?
 1. What happens if an assertion is false?
+2. Give a use case for __lt__
+3.  What does __str__ do
  
 ##Practice
 ______
@@ -35,8 +37,7 @@ ______
   * decorators
   * exception handling
   
-2. Write a function that takes 2 args(Arg1 and Arg2) such that Arg 1 is a list of numbers, Arg2 is a number. Return a list of size Arg2 from Arg1 such that no duplicates are present.
-eg.
+2. Write a function that takes 2 args(Arg1 and Arg2) such that Arg 1 is a list of numbers, Arg2 is a number. Return a list of size Arg2 from Arg1 such that no duplicates are present. eg
 ```
 def func(arg1, arg2):
   do something
@@ -44,4 +45,5 @@ def func(arg1, arg2):
 x = func([1,2,3,4,5,6,7,8], 4)
 # x is [6,2,7,1]
 ```
+3. Give a snippet highlighting inheritance in python
 
