@@ -658,5 +658,3 @@ How did we do it? By capping family size and industrial output
 So, study ASE to save the world.
 
 
-"""
-
