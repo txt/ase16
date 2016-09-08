@@ -16,6 +16,8 @@
 <em>(I keep being asked... where to get models? where to get models? After this lecture, you will have
 access to hundreds of models as well as methods for interviewing humans to learn their models.)</em>
 
+For source code for the following, see [dsl.py](../src/dsl.py).
+
 # Domain-Specific Languages 101 (in Python)
 
 This files shows an example of a small object-based DSL (domain-specific language) in Python.
