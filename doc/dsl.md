@@ -1,9 +1,17 @@
-from __future__ import print_function, division
-import sys
-sys.dont_write_bytecode = True
-from ok import *
 
-"""
+
+[home](http://tiny.cc/ase2016) |
+[copyright](https://github.com/txt/ase16/blob/master/LICENSE.md) &copy;2016, tim&commat;menzies.us
+<br>
+[<img width=900 src="https://raw.githubusercontent.com/txt/ase16/master/img/mase16.png">](http://tiny.cc/ase2016)<br>
+[overview](https://github.com/txt/ase16/blob/master/doc/overview.md) |
+[syllabus](https://github.com/txt/ase16/blob/master/doc/syllabus.md) |
+[src](https://github.com/txt/ase16/tree/master/src) |
+[submit](http://tiny.cc/ase16give) |
+[chat](https://ase16.slack.com/) 
+
+
+
 
 <em>(I keep being asked... where to get models? where to get models? After this lecture, you will have
 access to hundreds of models as well as methods for interviewing humans to learn their models.)</em>
@@ -142,7 +150,7 @@ class unittest:
 
 Here's an idiom for writing HTML:
 
-```Python
+```python
 from contextlib import contextmanager
 
 @contextmanager
@@ -302,7 +310,7 @@ introduce any shortcut function (e.g. `saturday`). To write the Python:
 
 ### Some set up code
 
-"""
+```python
 import random
 r   = random.random
 isa = isinstance
@@ -324,7 +332,7 @@ class o:
   def asList(i,keys=[]):
     keys = keys or i.keys()
     return [i[k] for k in keys]
-"""
+```
 
 ### Stocks, Flows, Aux are Subclasses of `Has`
   
@@ -333,7 +341,7 @@ class o:
 if values fall outside that range, this class can `restrain` them in).
 
 
-"""
+```python
 class Has:
   def __init__(i,init,lo=0,hi=100):
     i.init,i.lo,i.hi = init,lo,hi
@@ -354,13 +362,13 @@ class Stock(Has):
   def rank(i): return 1
 class Aux(Has)  :
   def rank(i): return 2
-"""
+```
 
 As promised:
 
-"""
+```python
 S,A,F = Stock,Aux,Flow
-"""
+```
 
 ### `Model`s  contain `Stock`s, `Flow`s and `Aux`
  
@@ -373,7 +381,7 @@ When we `run` a model:
 4. Between each time tick, we `restrain` any values that have gone
    out of scope. 
 
-"""
+```python
 class Model:
   def state(i):
     """To create a state vector, we create 
@@ -403,7 +411,7 @@ class Model:
       t += dt
       b4 = now
     return keep
-"""
+```
 
 ### Support Utilities
 
@@ -411,7 +419,7 @@ Here's a cool trick for printing lists of lists... but
 only showing new values if they are different to the row above.
 For example, with `printm`, our model outputs:
 
-```
+```python
 ###  _diapers1
 t  | C   | D  | q  | r | s
 0  | 100 | 0  | 0  | 8 | 0
@@ -449,7 +457,7 @@ t  | C   | D  | q  | r | s
 
 Otherwise, the output is a little harder to read:
 
-```
+```python
 ##  _diapers1
 t  | C   | D  | q  | r | s
 0  | 100 | 0  | 0  | 8 | 0
@@ -485,7 +493,9 @@ t  | C   | D  | q  | r | s
 29 | 92  | 80 | 0  | 8 | 0
 ```
 
-"""
+That trick is:
+
+```python
 def printm(matrix,less=True):
    """Print a list of list, only showing changes
    in each column (if less is True)."""
@@ -505,11 +515,11 @@ def printm(matrix,less=True):
    fmt = ' | '.join('{{:{}}}'.format(x) for x in lens)
    for row in [fmt.format(*row) for row in s]:
       print(row)
-"""
+```
 
 ### Model
 
-"""
+```python
 class Diapers(Model):
   def have(i):
     return o(C = S(100), D = S(0),
@@ -522,15 +532,17 @@ class Diapers(Model):
     v.s  =  u.D if saturday(t) else 0
     if t == 27: # special case (the day i forget)
       v.s = 0
-"""
+```
 
 ## Demo Code
 
-"""
+```python
 @ok
 def _diapers1():
   printm(Diapers().run())
-"""## Appendix 
+```
+
+## Appendix 
 
 ### Appendix A.: Debugging Compartmental Models
 
