@@ -16,12 +16,15 @@ ______
 
 ##  Theory
 1. What is ordered and unordered search. In what way are they different?
+2. What is the difference between a local and global maxima?
 3. What is the drawback of greedy search?
 2. Why do you think SA was so popular in 1950s?
 7. Is SA a single objective or a multiojective optimization algorithm?
 4. How would you terminate a stochastic algorithms such as SA sooner?
 5. What is mutation? Give an example.
 6. What type of surfaces(objective spaces) will SA find hard to optimize?
+7. What is a metaheurestic? State 2 properties of meta-heurestics.
+8. When finding a solution, you can either mutate towards ''Heaven'' (A better spot) or you can choose to mutate away from "Hell" (A worse spot). Why would you choose one over the other? (*HINT: One of them has a better diversity of search.*)
 
 
 ## Practice
