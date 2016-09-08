@@ -126,19 +126,20 @@ class Machine:
           alive = True
           w.now += 1
           machine.step(w)
+          Machine.report(machine.name)
           break
-      Machine.report()
       if not alive: break
 
     return w
 
   @staticmethod
-  def report():
+  def report(name):
     max_len = 50
     lst = [0]*(max_len+1)
     for machine in Machine.Factory:
       lst[machine.pos] += machine.name
-    print(" ".join(map(str, lst)))
+    show = lambda x : str(x if x else ".")
+    print(name," | ", " ".join(map(show, lst)))
 
   def step(i, w):
     if not i.here:
