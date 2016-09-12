@@ -15,7 +15,7 @@ ______
 
 
 
-# Homework4: Your Second Optimizer (Basic Max Walk Sat)
+# Homework5: Your Second Optimizer (Basic Max Walk Sat)
 
 Read the [lecture](mws.md) on Max Walk Sat.
 
