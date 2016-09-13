@@ -16,6 +16,9 @@ ______
 
 ##  Theory
 
+1. State few drawbacks of stochastic optimizers.
+2. What is pareto optimality? Describe using a graphical example.
+
 1. What is the problem with local maxima?
 
 1. In the following diagram, each square has the same x,y,z axis. What might the names of those x,y,z values?
