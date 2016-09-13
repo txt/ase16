@@ -57,7 +57,7 @@ of search-based optimization for exploring models
      </td>
      <td valign=top  xwidth="100px">
 
-7. <a href="doc/dsl.md">MaxWalkSat</a><br>
+7. <a href="doc/mws.md">MaxWalkSat</a><br>
 6. <a href="doc/dsl.md">DSLs</a><br>
 5. <a href="doc/talk4ssbse.md">SSBSE</a><br>
 4. <a href="doc/talk3sa.md">SA</a><br>
