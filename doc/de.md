@@ -104,23 +104,30 @@ Somehow, your models need to be able to report themselves as follows.
 
 Ranges for decision _d_:
 
+```python
     def lo(d): # return max range of decision d
     def hi(d): # return min range of decision d
-    
+```
+
 List of decision indexes:
 
-    def decisions(): # return list of indexes of the decisions
+```ptyhon
+  def decisions(): # return list of indexes of the decisions
+```
 
 Making sure something is in range:
 
-    def trim(x,d)  : # trim to legal range
+```python
+  def trim(x,d)  : # trim to legal range
       return max(lo(d), min(x, hi(d)))
+```
 
 Creating a new candidate. Candidates are things with
 _id,score_. They also  _have_ some decisions
 which
 are initialized at random from _lo_ to _hi_.
 
+```python
   def candidate():
     something = [lo(d) + n(hi(d) - lo(d)) 
                  for d in decisions()])
@@ -137,18 +144,21 @@ are initialized at random from _lo_ to _hi_.
       def __init__(self, **entries): 
      self.id = Thing.id = Thing.id + 1
        self.__dict__.update(entries)
+```
 
 Scoring one member in a population:
 
+```python
     def score(one):
       # returns distance from hell (combination of all objectives)
-  
+```  
   
 ### Differential Evolution
     
 Main function (which looks like any other evolutionary optimizer)
 creates an frontier, tries to update it, stopping if we are good enough:
 
+```python
     def de(max     = 100,  # number of repeats 
            np      = 100,  # number of candidates
          f       = 0.75, # extrapolate amount
@@ -161,7 +171,8 @@ creates an frontier, tries to update it, stopping if we are good enough:
     if total/n > (1 - epsilon): 
       break
       return frontier
-        
+```
+
 Action at each iteration. Make sure we have a score
 for the old timer on the frontier.  If some newly
 created candidate is better than the old timer, then
@@ -169,7 +180,8 @@ replace the old timer with the new candidate (and
 update the cache of scores). Returns the total
 of scores of the frontier (and its size).
     
-    def update(f,cf,frontier, total=0.0, n=0):
+```python
+  def update(f,cf,frontier, total=0.0, n=0):
     for x in frontier:
     s   = x.score
     new = extrapolate(frontier,x,f,cf)
@@ -179,6 +191,7 @@ of scores of the frontier (and its size).
     total += x.score
     n     += 1
     return total,n
+```
 
 Note one design choice in the above: better mutants
 get added into the frontier as soon as we find them;
@@ -189,7 +202,8 @@ pass.
 The core DE extrapolation-based mutator.
 Alters a field at probability _cf_,  _X + f*(Y - Z)_. 
 
-    def extrapolate(frontier,one,f,cf):
+```python
+  def extrapolate(frontier,one,f,cf):
     out = Thing(id   = one.id, 
                 have = copy(one.have))
     two,three,four = threeOthers(frontier,one)
@@ -205,6 +219,7 @@ Alters a field at probability _cf_,  _X + f*(Y - Z)_.
         out.have[d] = two[d]
     out.score = score(out) # remember to score it
       return out 
+```
 
 In the above code, note the use of the _changed_
 variable that assures us that at least one new value
@@ -217,6 +232,7 @@ definition of _different_, we will use that _id_
 value
 stored in our candidate:
 
+```python
     #Returns three different things that are not 'avoid'.
     def threeOthers(lst, avoid):
     def oneOther():
@@ -231,10 +247,10 @@ stored in our candidate:
     that = oneOther()
     theOtherThing = oneOther()
       return this, that, theOtherThing
-
   
     def a(lst) :
       return lst[n(len(lst))]
+```
 
 ## Storn97's  Parameter Recommendations
 
@@ -246,7 +262,6 @@ The _CR_ has  range one to zero.
 For many applications:
 
 + _NP_=10* number of decisions. 
-
 
 _F_ is usually chosen 0.5 to 1.
 
