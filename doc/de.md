@@ -111,7 +111,7 @@ Ranges for decision _d_:
 
 List of decision indexes:
 
-```ptyhon
+```python
   def decisions(): # return list of indexes of the decisions
 ```
 
@@ -136,21 +136,22 @@ are initialized at random from _lo_ to _hi_.
     new.score = score(new)
     return new
 
-    def n(max):
-      return int(random.uniform(0,max))
+  def n(max):
+    return int(random.uniform(0,max))
 
-    class Thing():
+  class Thing():
     id = 0
-      def __init__(self, **entries): 
-     self.id = Thing.id = Thing.id + 1
-       self.__dict__.update(entries)
+    def __init__(self, **entries): 
+      self.id = Thing.id = Thing.id + 1
+      self.__dict__.update(entries)
 ```
 
 Scoring one member in a population:
 
 ```python
-    def score(one):
-      # returns distance from hell (combination of all objectives)
+  def score(one):
+    # returns distance from hell (combination of all objectives)
+      
 ```  
   
 ### Differential Evolution
@@ -161,15 +162,15 @@ creates an frontier, tries to update it, stopping if we are good enough:
 ```python
     def de(max     = 100,  # number of repeats 
            np      = 100,  # number of candidates
-         f       = 0.75, # extrapolate amount
-         cf      = 0.3,  # prob of cross-over 
-       epsilon = 0.01
+           f       = 0.75, # extrapolate amount
+           cf      = 0.3,  # prob of cross-over 
+           epsilon = 0.01
          ):
       frontier = [candidate() for _ in range(np)] 
-    for k in range(max):
-    total,n = update(f,cf,frontier)
-    if total/n > (1 - epsilon): 
-      break
+      for k in range(max):
+        total,n = update(f,cf,frontier)
+        if total/n > (1 - epsilon): 
+          break
       return frontier
 ```
 
@@ -181,16 +182,21 @@ update the cache of scores). Returns the total
 of scores of the frontier (and its size).
     
 ```python
-  def update(f,cf,frontier, total=0.0, n=0):
-    for x in frontier:
-    s   = x.score
-    new = extrapolate(frontier,x,f,cf)
-        if new.score > s:
-      x.score = new.score
-      x.have  = new.have
-    total += x.score
-    n     += 1
-    return total,n
+    def update(f,cf,frontier, total=0.0, n=0):
+      for x in frontier:
+        s   = x.score
+        new = extrapolate(frontier,x,f,cf)
+        if better(new.score, s):
+          x.score = new.score
+          x.have  = new.have
+        total += x.score
+        n     += 1
+      return total,n
+      
+    def better(this,that):
+      "continuous or binary domination"
+    ...
+
 ```
 
 Note one design choice in the above: better mutants
@@ -207,10 +213,10 @@ Alters a field at probability _cf_,  _X + f*(Y - Z)_.
     out = Thing(id   = one.id, 
                 have = copy(one.have))
     two,three,four = threeOthers(frontier,one)
-      changed = False  
-      for d in decisions():
+    changed = False  
+    for d in decisions():
       x,y,z = two.have[d], three.have[d], four.have[d]
-    if rand() < cr:
+      if rand() < cr:
         changed = True
         new     = x + f*(y - z)
         out.have[d]  = trim(new,d) # keep in range
@@ -218,7 +224,7 @@ Alters a field at probability _cf_,  _X + f*(Y - Z)_.
         d      = a(decisions())
         out.have[d] = two[d]
     out.score = score(out) # remember to score it
-      return out 
+    return out 
 ```
 
 In the above code, note the use of the _changed_
@@ -233,23 +239,23 @@ value
 stored in our candidate:
 
 ```python
-    #Returns three different things that are not 'avoid'.
-    def threeOthers(lst, avoid):
+  #Returns three different things that are not 'avoid'.
+  def threeOthers(lst, avoid):
     def oneOther():
       x = avoid
       while x.id in seen: 
         x = a(lst)
       seen.append( x.id )
       return x
-      # -----------------------
+    # -----------------------
     seen = [ avoid.id ]
-      this = oneOther()
+    this = oneOther()
     that = oneOther()
     theOtherThing = oneOther()
-      return this, that, theOtherThing
+    return this, that, theOtherThing
   
-    def a(lst) :
-      return lst[n(len(lst))]
+  def a(lst) :
+    return lst[n(len(lst))]
 ```
 
 ## Storn97's  Parameter Recommendations
