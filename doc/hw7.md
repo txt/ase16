@@ -13,6 +13,6 @@
 ______
 
 
-# Homework7: Finte State Machines
+# Homework7: FSMs + GA
 
-Hand in the completed programming assignment on finite state machines..
+Hand in the completed programming assignment on combining GAs + finite state machines.
