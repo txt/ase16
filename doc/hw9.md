@@ -37,7 +37,7 @@ Rewrite your SA and MWS code such that you can run the following loop:
 for model in [Schaffer, Osyczka2, Kursawe]:
     for optimizer in [sa, mws]:
            optimizer(model())
-           ```
+```
 
 This is the _generic experiment loop_ that allows for rapid extension to handle more models and more optimizers.
 
