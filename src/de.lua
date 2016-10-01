@@ -40,35 +40,36 @@ local de={}
 function de.less(x,y) return x < y end
 function de.more(x,y) return x > y end
 
-function de.num(t) 
+function de.num0(t) 
   t.lo = t.lo or 0
   t.hi = t.hi or 1
   return t
 end
 
-function de.sym(t)
+function de.sym0(t)
   t.all = t.all or {}
 end
 
-function de.obj(t)  
-  de.num(t)
+function de.obj0(t)  
+  de.num0(t)
   t.better = t.better or less
   t.get    = t.get or de.numAny
   return t
 end
 
-function de.xy(t)
+function de.xy0(t)
   t   = t or {}
   t.x = t.x or {}
   t.y = t.y or {}
   return t
 end
--------------------------------
-function de.model(t)
-  de.xy(t)
+
+function de.model0(t)
+  de.xy0(t)
   t.ok = t.ok   or (function (_) return True end)
 end
 
+-------------------------------
 function de.ok(i, t, wants)
   local function num()
     assert t[i] >= wants[i].lo and t[i] <= wants[j].hi end
@@ -84,13 +85,14 @@ function de.oks(wants,t)
 end
 
 function de.any(want)
+  -- inssert get overrides here
   local function num() return want.lo + r()*(want.hi - want.lo) end
   local function sym() return any(want.all) end
   return (want.all and sym or num)()
 end
 
 function de.model2decs(wants)
-  local got = de.xy()
+  local got = de.xy0()
   for k,want in pairs(wants.x) do
     got.x[k] = de.any(want)
   end
