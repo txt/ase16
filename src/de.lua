@@ -34,67 +34,77 @@ local function has(t, x)
   return false
 end
 
+function less(x,y) return x < y end
+function more(x,y) return x > y end
+function yes(...) return True end
+
 --------------------------------------
-local de={}
+local want={}
 
-function de.less(x,y) return x < y end
-function de.more(x,y) return x > y end
-
-function de.num0(t) 
-  t.lo = t.lo or 0
-  t.hi = t.hi or 1
+function ako(t,o)
+  t = t or {}
+  t.__ako == o
+  o(t)
   return t
 end
 
-function de.sym0(t)
+function xy0(t)
+  t.x = t.x or {}
+  t.y = t.y or {}
+end
+
+function want.num0(t)
+  t.lo = t.lo or 0
+  t.hi = t.hi or 1
+end
+
+function want.sym0(t)
   t.all = t.all or {}
 end
 
-function de.obj0(t)  
-  de.num0(t)
+function want.obj0(t)  
+  t        = ako(t, want.num0)
   t.better = t.better or less
   t.get    = t.get or de.numAny
-  return t
 end
 
-function de.xy0(t)
-  t   = t or {}
-  t.x = t.x or {}
-  t.y = t.y or {}
-  return t
+function want.model0(t)
+  t = ako(t, xy0)
+  t.ok = t.ok or yes
 end
 
-function de.model0(t)
-  de.xy0(t)
-  t.ok = t.ok   or (function (_) return True end)
-end
+function want.any(t)
+  local function num() return t.lo + r()*(t.hi - t.lo) end
+  local function sym() return any(t.all) end
+  if t.__get then
+    return t.__get(t)
+  else
+    return (t.all and sym or num)()
+end end
 
 -------------------------------
-function de.ok(i, t, wants)
+got={}
+
+function got.ok(i, t, wants)
   local function num()
-    assert t[i] >= wants[i].lo and t[i] <= wants[j].hi end
+    assert (t[i] >= wants[i].lo and t[i] <= wants[j].hi ) end
   local function sym()
-    assert has(wants[i].all, t[i]) end
+    assert (has(wants[i].all, t[i])) end
    if t[i] ~= nil then
      f = (t.all and num or sym)()
 end end 
 
-function de.oks(wants,t)
-  for i = 1,#wants.x do de.ok(i, t.x, wants.x) end 
-  for i = 1,#wants.y do de.ok(i, t.y, wants.y) end
+function got.oks(wants,t)
+  for i = 1,#wants.x do got.ok(i, t.x, wants.x) end 
+  for i = 1,#wants.y do got.ok(i, t.y, wants.y) end
 end
 
-function de.any(want)
-  -- inssert get overrides here
-  local function num() return want.lo + r()*(want.hi - want.lo) end
-  local function sym() return any(want.all) end
-  return (want.all and sym or num)()
-end
+
 
 function de.model2decs(wants)
   local got = de.xy0()
-  for k,want in pairs(wants.x) do
-    got.x[k] = de.any(want)
+  for k,want1 in pairs(wants.x) do
+    got.x[k] = want.any(want1)
   end
   return got
 end
@@ -129,10 +139,10 @@ function m1()
   function get1(xy)
     return (xy[1] + xy[2])^2
   end
-  local s,n,o = de.sym, de.num,de.obj
+  local s,n,o = want.sym0, want.num0,want.obj0
   return de.model{
     decs={
-      s{name="day", all={"mon","tue","wed","thr","fri","sat","sun"}}
+      s{name="day", all={"mon","tue","wed","thr","fri","sat","sun"}},
       d{name="d1", lo=10, hi=40},
       d{name="d2", lo=30, hi=50}
     } ,
@@ -140,5 +150,4 @@ function m1()
       o{name="o1",get = get1},
       o{name="o2",want = more}
   }}
-
-  -- want got, seen
+end
