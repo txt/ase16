@@ -13,7 +13,7 @@
 
 ______
 
-# Homework8: coding homework:  Generic Experiments
+# Homework6: coding homework:  Generic Experiments
 
 NOTE TO STUDENTS: if this homework seems too complex, then reflect
 a little more on the prior optimizing
