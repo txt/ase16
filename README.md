@@ -79,6 +79,7 @@ of search-based optimization for exploring models
 1. <a href="doc/hw1.md">hw1</a>
 
      </td><td valign=top xwidth="100px">
+7. <a href="doc/review/review7.md"> review7</a><br>
 6. <a href="doc/review/review6.md"> review6</a><br>
 5. <a href="doc/review/review5.md"> review5</a><br>
 4. <a href="doc/review/review4.md"> review4</a><br>
