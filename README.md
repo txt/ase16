@@ -67,9 +67,12 @@ of search-based optimization for exploring models
 1. <a href="doc/talk1.md">About MASE</a><br>
 0. <a href="https://github.com/txt/fss16/blob/master/doc/reading12345678.md">Reading12345678</a>
 
-</td><td valign=top xwidth="100px"> 
-6. <a href="doc/hw8.md">hw6</a><br>
+</td><td valign=top xwidth="100px">
+3. <a href="https://github.com/ase16-ta/pom3-ga">ws3</a><br>
+2. <a href="https://github.com/ase16-ta/fsms">ws2</a><br>
+1. <a href="https://github.com/ase16-ta/ga">ws1</a><br>
 <hr>
+6. <a href="doc/hw8.md">hw6</a><br>
 5. <a href="doc/hw5.md">hw5</a><br>
 4. <a href="doc/hw4.md">hw4</a><br>
 3. <a href="doc/hw3.md">hw3</a><br>
