@@ -72,7 +72,7 @@ of search-based optimization for exploring models
 2. <a href="https://github.com/ase16-ta/fsms">ws2</a><br>
 1. <a href="https://github.com/ase16-ta/ga">ws1</a><br>
 <hr>
-6. <a href="doc/hw8.md">hw6</a><br>
+6. <a href="doc/hw6.md">hw6</a><br>
 5. <a href="doc/hw5.md">hw5</a><br>
 4. <a href="doc/hw4.md">hw4</a><br>
 3. <a href="doc/hw3.md">hw3</a><br>
