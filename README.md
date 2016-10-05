@@ -30,15 +30,15 @@ of search-based optimization for exploring models
 </td>
 
 <td align=center><b>Lectures
-<img width=65 src="img/200x1.png"></b>
+<img width=90 src="img/200x1.png"></b>
 </td><td align=center><b>Homework
 <img width=65 src="img/200x1.png"></b>
 </td><td align=center><b>Review
-<img width=65 src="img/200x1.png">
-
+<img width=65 src="img/200x1.png"/></b>
+</td><td align=center><b>Workshop
+<img width=65 src="img/200x1.png"></b>
 </td><td align=center><b>Cool stuff
-<img width=90 src="img/200x1.png">
-
+<img width=65 src="img/200x1.png"></b>
 </td>
 
 </tr>
@@ -49,6 +49,7 @@ of search-based optimization for exploring models
      <td align=center><img src="img/lectures.gif">
      </td><td align=center><img src="img/homework.png">
      </td><td align=center><img src="img/review.gif">
+     </td><td align=center><img width=64 src="img/books.png">
      </td><td align=center><img width=64 src="img/books.png">
      </td> </tr>
      <tr>
@@ -68,10 +69,6 @@ of search-based optimization for exploring models
 0. <a href="https://github.com/txt/fss16/blob/master/doc/reading12345678.md">Reading12345678</a>
 
 </td><td valign=top xwidth="100px">
-3. <a href="https://github.com/ase16-ta/pom3-ga">ws3</a><br>
-2. <a href="https://github.com/ase16-ta/fsms">ws2</a><br>
-1. <a href="https://github.com/ase16-ta/ga">ws1</a><br>
-<hr>
 6. <a href="doc/hw6.md">hw6</a><br>
 5. <a href="doc/hw5.md">hw5</a><br>
 4. <a href="doc/hw4.md">hw4</a><br>
@@ -89,7 +86,11 @@ of search-based optimization for exploring models
 1. <a href="doc/review/review1.md"> review1</a><br>
 0. <a href="doc/review/review0.md"> review0</a>
 
-     </td><td valign=top><small>
+     </td><td valign=top xwidth="100px">
+         3. <a href="https://github.com/ase16-ta/pom3-ga">ws3</a><br>
+         2. <a href="https://github.com/ase16-ta/fsms">ws2</a><br>
+         1. <a href="https://github.com/ase16-ta/ga">ws1</a><br>
+     </td><td valign=top>
 
      </td>
 </tr></table>
