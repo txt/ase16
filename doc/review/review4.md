@@ -48,7 +48,7 @@ ______
    + Then taking one step along the direction where the marbles roll the furthest.
    + Go to 1.
 
-In the following code snippet, explain where you'd find 8.
+In the following code snippet, explain where you'd find "local search".
 ```
 FOR i = 1 to max-tries DO
   solution = random assignment
