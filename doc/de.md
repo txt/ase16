@@ -220,9 +220,9 @@ Alters a field at probability _cf_,  _X + f*(Y - Z)_.
         changed = True
         new     = x + f*(y - z)
         out.have[d]  = trim(new,d) # keep in range
-      if not changed:
-        d      = a(decisions())
-        out.have[d] = two[d]
+    if not changed:
+      d      = a(decisions())
+      out.have[d] = two[d]
     out.score = score(out) # remember to score it
     return out 
 ```
