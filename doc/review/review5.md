@@ -20,7 +20,7 @@ ______
 1. What is a context manager?
  - logger
  - timer
-1. Compartmental models are a visual representation of 1st order linear equation. Justify
+1. Compartmental models are a visual representation of 1st order linear differential equation. Justify
 1. What is elite sampling?
 1. Define — stocks, flows
 1. What are auxillary variables used for?
