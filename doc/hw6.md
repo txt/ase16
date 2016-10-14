@@ -60,6 +60,7 @@ That model defines:
 + the number of objectives;
 + the name of each decision/objective;
 + the min/max range of each decision/objective;
++ the _any_ function that generates an instance of the decisions(randomly between min and max for each  decision)
 + the _ok_ function that checks if a particular candidate is valid (for _Schaffer and Kursawe_, this returns _True_ while
 for _Osyczka2_, this does some checking).
 + the _eval_ function that computes the objective scores for each candidate
