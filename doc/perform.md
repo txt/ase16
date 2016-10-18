@@ -60,7 +60,8 @@ get very large.
 - In [Python](https://github.com/ai-se/Spread-HyperVolume).
 - In ["R"](https://github.com/cran/hypervolume)
 
-Note that the _more_ the hypervolume, the _better_.
+Note that the _more_ the hypervolume, the _better_ sicne this
+means this optimizer is most approaching "heaven".
 
 ### Spread
 
@@ -91,7 +92,8 @@ Calculating spread:
 - If all data is maximally spread, then all distances _d<sub>i</sub>_ are near mean d
 which would make _&Delta;=0_ ish.
 
-Note that _less_ the spread of each point to its neighbor, the _better_.
+Note that _less_ the spread of each point to its neighbor, the _better_
+since this means the optimiser is offering options across more of the frontier.
 
 ### IGD
 
@@ -105,6 +107,14 @@ IGD = inter-generational distance; i.e. how good are you compared to the _best k
       - For each item in its final Pareto frontier
       - Find the nearest item in the reference set
 
+Note that the _less_ the mean IGD, the _better_ the optimizer since
+this means its solutions are closest to the best of the best.
+
+Pragmatics:
+
+- I like expressing IGD as a ratio of the raw IGD scores of population0
+  from generation0 to the reference point. This gives a nice baseline effect
+  for understanding the numbers.
 
 Details:
 
