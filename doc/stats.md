@@ -54,7 +54,7 @@ Well, first you need:
   which collects the performance measure.
   - Tools to run all the above.
 
-See [perform.md] for notes on 1,2,3.
+See [perform.md](perform.md) for notes on 1,2,3.
 
 This talk is about  4,5.
 

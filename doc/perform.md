@@ -32,7 +32,7 @@ Well, first you need:
 
 This talk is about  1,2,3.
 
-See [stats.md] for notes on 4,5.
+See [stats.md](stats.md) for notes on 4,5.
 
 ## Models
 
