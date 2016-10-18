@@ -199,7 +199,7 @@ dominated that the other. It only says "true".  Not the most informative!
 
 So that as the number of objectives increase, _bdom_ losses to _cdom_.
 
-<img width=600 src="../img/cbdom.png">
+<a href="../img/cbdom.png"><img width=600 src="../img/cbdom.png"></a>
 
 What _cdom_ does is that it takes the differences between each objective, then
 raises it to a exponential factor (so those differences _SHOUT_ louder). From this we compute the mean _loss_
