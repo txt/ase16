@@ -98,29 +98,6 @@ IGD = inter-generational distance; i.e. how good are you compared to the _best k
       - For each item in its final Pareto frontier
       - Find the nearest item in the reference set
 
-```
-optimal known?
-  yes: use it
-  no:
-    combine frontiers from all optimizers
-    remove duplications
-      epsilon known?
-        yes: use near match
-        no: use exact match
-    downSelect to "N" items
-      use binary domination
-        yes:
-          count how often each one dominates another
-          select candidates that dominate the most
-          selection > "N"
-            no: use selection
-            yes:
-              sort descending by cubiod distance around them
-              use first 1.."N"
-        no:
-          sort each, ascending, from the sum of its losses to all other
-          use first "N"
-```
 
 Details:
 
@@ -157,6 +134,31 @@ Details:
 	  - Return the left-most _"N"_ items in that sort.
 
 <img src="../img/crowdcalc.png">
+
+```
+optimal known?
+  yes: use it
+  no:
+    combine frontiers from all optimizers
+    remove duplications
+      epsilon known?
+        yes: use near match
+        no: use exact match
+    downSelect to "N" items
+      use binary domination
+        yes:
+          count how often each one dominates another
+          select candidates that dominate the most
+          selection > "N"
+            no: use selection
+            yes:
+              sort descending by cubiod distance around them
+              use first 1.."N"
+        no:
+          sort each, ascending, from the sum of its losses to all other
+          use first "N"
+```
+
 
 ### Binary Domination
 
@@ -197,7 +199,7 @@ dominated that the other. It only says "true".  Not the most informative!
 
 So that as the number of objectives increase, _bdom_ losses to _cdom_.
 
-<img width=500 src="../img/cbdom.png">
+<img width=600 src="../img/cbdom.png">
 
 What _cdom_ does is that it takes the differences between each objective, then
 raises it to a exponential factor (so those differences _SHOUT_ louder). From this we compute the mean _loss_
