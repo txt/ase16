@@ -510,6 +510,10 @@ The world is not normal:
 <img src="../img/notnorm2.png"><br>
 <img src="../img/notnorm6.gif"><br>
 <img src="../img/notnorm5.png"><br>
+
+This last one is a thing of beauty. Its 50 different SQL queries and the distribution of times
+CPU is waiting on hard drive i/o:
+
 <img src="../img/notnorm8.png">
 
 So, when the world is a funny shape, what to do?
