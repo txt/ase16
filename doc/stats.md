@@ -98,6 +98,30 @@ IGD = inter-generational distance; i.e. how good are you compared to the _best k
       - For each item in its final Pareto frontier
       - Find the nearest item in the reference set
 
+```
+optimal known?
+  yes: use it
+  no:
+    combine frontiers from all optimizers
+    remove duplications
+      epsilon known?
+        yes: use near match
+        no: use exact match
+    downSelect to "N" items
+      use binary domination
+        yes:
+          count how often each one dominates another
+          select candidates that dominate the most
+            selection > "N"
+              no: use selection
+              yes:
+                sort descending by cubiod distance around them
+                use first 1.."N"
+        no:
+          sort each, ascending, from the sum of its losses to all other
+          use first "N"
+```
+
 Details:
 
 - Problem1: Optimal reference set may be unobtainable (if the model is very nasty).
@@ -125,7 +149,7 @@ Details:
 - Problem 3a1a: How to compute "crowded"
       - Select all candidates that dominate the most number of other candidates.
       - For that set, sort each candidate separately on each objective.
-      - On each objective _O<sub>i</sub>, compute the distance left and right to
+      - On each objective _O<sub>i</sub>_, compute the distance left and right to
 	    its nearest neighbor
 	  - Let the cuboid around a candidate _V<sub>x</sub>_
 	    be the product  _V<sub>x</sub> = &prod;<sub>i</sub>O<sub>i</sub>_
