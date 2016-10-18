@@ -139,6 +139,7 @@ Details:
 
 <img src="../img/crowdcalc.png">
 
+Summary: 
 ```
 optimal known?
   yes: use it
