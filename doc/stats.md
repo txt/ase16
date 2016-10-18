@@ -106,14 +106,17 @@ Details:
       - Let the combined Pareto frontier from _"a"_ optimizers, removing duplicates.
       - Down select those _"aN"_ items to the  the best _"N"_ best ones.
 	  - Use the resulting space as the reference set
+          
 - Problem2: How to remove duplicates?
       - Solution2a: exact match on decisions (may not be v.useful for real-valued decisions)
       - Solution2b: from the business users, find the minimum value &epsilon;	that
 	    they can control each decision. Declare two decisions _same_ if they are within
 	    &epsilon;.
+            
 - Problem3: How to down select?
       - Solution3: count how many times each item in _"aN"_ dominates something else.
       - Keep just the _"N"_ items with highest domination count.
+      
 - Problem3a: with _binary domination_, many things may have the highest domination
 	    count, especially when dealing with high dimensional objections.
       - Solution 3a1: Delete at random from most crowded
@@ -123,6 +126,7 @@ Details:
 	    since, usually, cdom rejects one item in the comparison. So in this approach,
 	    sort each item by the sum of how much it _losses_ to everyone else. They
 		pick the _"N"_ that lose least.
+                
 - Problem 3a1a: How to compute "crowded"
       - Select all candidates that dominate the most number of other candidates.
       - For that set, sort each candidate separately on each objective.
@@ -213,7 +217,7 @@ Formally, this is a domination test across the Pareto frontier.
 - First, we normalize _x,y_ to  0..1
 - Then we adjust the direction of the comparison depending on
   whether or not we are _minimizing_ that objective.
-- Third, we raise the differences _x - y_to some exponential (i.e.
+- Third, we raise the differences _x - y_ to some exponential (i.e.
   the larger the difference, the louder we shout!)
 - Lastly, we return the mean loss over all objectives.
 
