@@ -35,6 +35,14 @@ Well, first you need:
   which collects the performance measure.
   - Tools to run all the above.
 
+## Models
+
+We have
+
+## Optimizers
+
+GA, SA,PSO, DE, etc etc.
+
 ## Performance Measures
 
 ### HyperVolume
@@ -249,9 +257,10 @@ def expLoss(i,x1,y1,n):
   w = -1 if minimizing(i) else 1 # adjust for direction of comparison
   return -1*math.e**( w*(x1 - y1) / n ) # raise the differences to some exponent
 ```  
-		
-The test that one optimizer is better than another can be recast as four
-checks on the *distribution* of performance scores.
+
+## Compare Measures
+
+To compare  if one optimizer is better than another, apply the followng rules:
 
 1.  Visualize the data, somehow.
 2.  Check if the central tendency of one distribution is *better* than
@@ -259,9 +268,86 @@ checks on the *distribution* of performance scores.
 3.  Check the different between the central tendencies is not some
     *small effect*.
 4.  Check if the distributions are *significantly different*;
+
+### Visualize the Data
+
+
+When faced with new data, always chant the following mantra:
+
+-   *First* visualize it to get some intuitions;
+-   *Then* apply some statistics to double check those intuitions.
+
+That is, it is *strong recommended* that, prior doing any statistical
+work, an analyst generates a visualization of the data.
+
+Percentile
+charts a simple way to display very large populations in very little
+space.
+Suppose we had two optimizers which in a 10 repeated runs generated
+performance from two models:
+
+        1:       def _tile2():
+        2:         def show(lst):
+        3:            return xtile(lst,lo=0, hi=1,width=25,
+        4:                         show= lambda s:" %3.2f" % s)
+        5:         print "one", show([0.21, 0.29, 0.28, 0.32, 0.32, 
+        6:                            0.28, 0.29, 0.41, 0.42, 0.48])
+        7:         print "two", show([0.71, 0.92, 0.80, 0.79, 0.78, 
+        8:                            0.9,  0.71, 0.82, 0.79, 0.98])
+
+Here are the percentile charts:
+
+       one         * --|            , 0.28,  0.29,  0.32,  0.41,  0.48
+       two             |    -- * -- , 0.71,  0.79,  0.80,  0.90,  0.98
+
+In this percentile chart, the 2nd and 3rd percentiles as little dashes
+left and right of the median value, shown with a *"\*"*, (learner
+*two*'s 3rd percentile is so small that it actually disappears in this
+display). The vertical bar *"|"* shows half way between the display's
+min and max (in this case, that would be (0.0+1.00)/2= 0.50)
+
+
+The advantage of percentile charts is that we can show a lot of data in
+very little space. 
+
+For example, here's an example where the _xtile_ Python function
+shows 2000 numbers on two lines:
+
+-   Quintiles divide the data into the 10th, 30th, 50th, 70th, 90th
+    percentile.
+-   Dashes (*"-"*) mark the range (10,30)th and (70,90)th percentiles;
+-   White space marks the ranges (30,50)th and (50,70)th percentiles.
+Consider two distributions, of 1000 samples each: one shows square root
+of a *rand()* and the other shows the square of a *rand()*.
+
+       10:       def _tile() :
+       11:         import random
+       12:         r = random.random
+       13:         def show(lst):
+       14:           return xtile(lst,lo=0, hi=1,width=25,
+       15:                        show= lambda s:" %3.2f" % s)
+       16:         print "one", show([r()*0.5 for x in range(1000)])
+       17:         print "two", show([r()2   for x in range(1000)])
+
+In the following quintile charts, we show these distributions:
+
+-   The range is 0 to 1.
+-   One line shows the square of 1000 random numbers;
+-   The other line shows the square root of 1000 random numbers;
+
+Note the brevity of the display:
+
+     one        -----|    *  ---  , 0.32,  0.55,  0.70,  0.84,  0.95
+     two --    *     |--------    , 0.01,  0.10,  0.27,  0.51,  0.85
+
     
-The first step is very important. Stats should always be used as sanity
-checks on intuitions gained by other means. So look at the data before
+As before, the median value, shown with a *"\*"*; and the point half-way
+between min and max (in this case, 0.5) is shown as a vertical bar
+*"|"*.
+
+
+
+So look at the data before
 making, possibly bogus, inferences from it. For example, here are some
 charts showing the effects on a population as we apply more and more of
 some treatment. Note that the mean of the populations remains unchanged,
@@ -304,77 +390,9 @@ distribution are usually better than the other.
 
 ### Step1: Visualization
 
-Suppose we had two optimizers which in a 10 repeated runs generated
-performance from two models:
 
-        1:       def _tile2():
-        2:         def show(lst):
-        3:            return xtile(lst,lo=0, hi=1,width=25,
-        4:                         show= lambda s:" %3.2f" % s)
-        5:         print "one", show([0.21, 0.29, 0.28, 0.32, 0.32, 
-        6:                            0.28, 0.29, 0.41, 0.42, 0.48])
-        7:         print "two", show([0.71, 0.92, 0.80, 0.79, 0.78, 
-        8:                            0.9,  0.71, 0.82, 0.79, 0.98])
-
-When faced with new data, always chant the following mantra:
-
--   *First* visualize it to get some intuitions;
--   *Then* apply some statistics to double check those intuitions.
-
-That is, it is *strong recommended* that, prior doing any statistical
-work, an analyst generates a visualization of the data. Percentile
-charts a simple way to display very large populations in very little
-space. For example, here are our results from *one*, displayed on a
-range from 0.00 to 1.00.
-
-      one         * --|            , 0.28,  0.29,  0.32,  0.41,  0.48
-      two             |    -- * -- , 0.71,  0.79,  0.80,  0.90,  0.98
-
-In this percentile chart, the 2nd and 3rd percentiles as little dashes
-left and right of the median value, shown with a *"\*"*, (learner
-*two*'s 3rd percentile is so small that it actually disappears in this
-display). The vertical bar *"|"* shows half way between the display's
-min and max (in this case, that would be (0.0+1.00)/2= 0.50)
 
 #### Xtile
-
-The advantage of percentile charts is that we can show a lot of data in
-very little space. 
-
-For example, here's an example where the _xtile_ Python function
-shows 2000 numbers on two lines:
-
--   Quintiles divide the data into the 10th, 30th, 50th, 70th, 90th
-    percentile.
--   Dashes (*"-"*) mark the range (10,30)th and (70,90)th percentiles;
--   White space marks the ranges (30,50)th and (50,70)th percentiles.
-Consider two distributions, of 1000 samples each: one shows square root
-of a *rand()* and the other shows the square of a *rand()*.
-
-       10:       def _tile() :
-       11:         import random
-       12:         r = random.random
-       13:         def show(lst):
-       14:           return xtile(lst,lo=0, hi=1,width=25,
-       15:                        show= lambda s:" %3.2f" % s)
-       16:         print "one", show([r()*0.5 for x in range(1000)])
-       17:         print "two", show([r()2   for x in range(1000)])
-
-In the following quintile charts, we show these distributions:
-
--   The range is 0 to 1.
--   One line shows the square of 1000 random numbers;
--   The other line shows the square root of 1000 random numbers;
-
-Note the brevity of the display:
-
-     one        -----|    *  ---  , 0.32,  0.55,  0.70,  0.84,  0.95
-     two --    *     |--------    , 0.01,  0.10,  0.27,  0.51,  0.85
-
-    
-As before, the median value, shown with a *"\*"*; and the point half-way
-between min and max (in this case, 0.5) is shown as a vertical bar
-*"|"*.
 
 ### Step2: Check Medians
 
