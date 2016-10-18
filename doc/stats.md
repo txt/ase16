@@ -61,9 +61,9 @@ In the following 2d optimization space, which optimizer do you like?
 
 - Hint: we want to minimize all objectives
 - The left hand side plot _seems_ to have lower hypervolumes. But is there anything
-we do not like about the moddle and right-hand-side plots?
+we do not like about the middle and right-hand-side plots?
 
-<img width=500 src="../img/spread.png">
+<img width=600 src="../img/spread.png">
 
 The middle and right-hand side solutions are not very _spread_ (huge gaps in the frontier).
 
