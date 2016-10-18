@@ -506,9 +506,9 @@ safer, but somewhat slower, procedure:
 The world is not normal:
 
 <img src="../img/notnorm4.png"><br>
-<img src="../img/notnorm1.png"><br>
+<img src="../img/notNorm1.png"><br>
 <img src="../img/notnorm2.png"><br>
-<img src="../img/notnorm6.png"><br>
+<img src="../img/notnorm6.gif"><br>
 <img src="../img/notnorm5.png"><br>
 <img src="../img/notnorm8.png">
 
