@@ -31,6 +31,9 @@ Your task:
        - When you have answers to all the above (and not before), compare your results to   
          `cat statX.txt | python stats.py --text 30`
 
+Note the code `stats.py`. What does it do? How does it generate the `rank`
+numbers? Well, to explain all that, we are going need some theory...
+
 # Theory
 
 Sooner or later, you are going to ask "is GA/DE/PSO better than GA/DE/PSO" etc.
@@ -500,7 +503,7 @@ code, this _ab12slow_ function runs in polynomial time (since for each item in _
 it runs over all of _lst2_):
 
 ```python
-def a12slow(lst1,lst2):
+def a12slow(lst1,lst2,small=0.56):
     more = same = 0.0
     for x in sorted(lst1):
       for y in sorted(lst2):
@@ -508,13 +511,13 @@ def a12slow(lst1,lst2):
           same += 1
         elif x > y : 
           more += 1
-    return (more + 0.5*same) / (len(lst1)*len(lst2))
+    return (more + 0.5*same) / (len(lst1)*len(lst2)) < small.
 ```
 
 Here's a faster version taht sorts the lists first
 
 ```python
-def a12(lst1,lst2):
+def a12(lst1,lst2,small=0.56):
   "how often is x in lst1 more than y in lst2?"
   def loop(t,t1,t2): 
     while t1.j < t1.n and t2.j < t2.n:
@@ -538,7 +541,7 @@ def a12(lst1,lst2):
   t1   = o(l=lst1,j=0,eq=0,gt=0,n=n1)
   t2   = o(l=lst2,j=0,eq=0,gt=0,n=n2)
   gt,eq= loop(t1, t1, t2)
-  return gt/(n1*n2) + eq/2/(n1*n2)  >= The.a12
+  return gt/(n1*n2) + eq/2/(n1*n2) < 0.56
 ```
 
 The above uses a helper class:
@@ -561,7 +564,7 @@ class o():
 
 The following code benchmarks slow and fast a12:
 
-```
+```python
 def _ab12():  
   random.seed(1)
   l1 = [random.random() for x in range(5000)]
@@ -655,6 +658,9 @@ different to the other. So large variances can mean that even if the
 means are *better*, we cannot really say that the values in one
 distribution are usually better than the other.
 
+In any case, what a signifcance test does is report how small
+is the overlap between two distributions (and if it is very small,
+then we say the differences are _statistically significant_.
 My preferred test for statistical significance is the bootstrap.
 
 #### Bootstrap
@@ -781,226 +787,21 @@ the effect size test (and only go to bootstrapping in effect size passes:
 ```python
 def different(l1,l2):
   #return bootstrap(l1,l2) and a12(l2,l1)
-  return a12(l2,l1) and bootstrap(l1,l2)
+  return not a12(l2,l1) and bootstrap(l1,l2)
 
 ```
 
 #### Scott-Knott So, How to Rank?
 
-For the most part, we are concerned with very high-level issues that
-strike to the heart of the human condition:
-
--   What does it mean to find controlling principles in the world?
--   How can we find those principles better, faster, cheaper?
-
-But sometimes we have to leave those lofty heights to discuss more
-pragmatic issues. Specifically, how to present the results of an
-optimizer and, sometimes, how to compare and rank the results from
-different optimizers.
-
-Note that there is no best way, and often the way we present results
-depends on our goals, the data we are procesing, and the audience we are
-trying to reach. So the statistical methods discussed below are more
-like first-pass approximations to something you may have to change
-extensively, depending on the task at hand.
-
-In any case, in order to have at least one report that that you quickly
-generate, then....
-
-
-## Significance Tests
-
-### Standard Utils
-
-Didn't we do this before?
-
-Misc functions:
-
-```python
-rand = random.random
-any  = random.choice
-seed = random.seed
-exp  = lambda n: math.e**n
-ln   = lambda n: math.log(n,math.e)
-g    = lambda n: round(n,2)
-
-def median(lst,ordered=False):
-  if not ordered: lst= sorted(lst)
-  n = len(lst)
-  p = n//2
-  if n % 2: return lst[p]
-  q = p - 1
-  q = max(0,min(q,n))
-  return (lst[p] + lst[q])/2
-
-def msecs(f):
-  import time
-  t1 = time.time()
-  f()
-  return (time.time() - t1) * 1000
-
-def pairs(lst):
-  "Return all pairs of items i,i+1 from a list."
-  last=lst[0]
-  for i in lst[1:]:
-    yield last,i
-    last = i
-
-def xtile(lst,lo=The.lo,hi=The.hi,width=The.width,
-             chops=[0.1 ,0.3,0.5,0.7,0.9],
-             marks=["-" ," "," ","-"," "],
-             bar="|",star="*",show=" %3.0f"):
-  """The function _xtile_ takes a list of (possibly)
-  unsorted numbers and presents them as a horizontal
-  xtile chart (in ascii format). The default is a 
-  contracted _quintile_ that shows the 
-  10,30,50,70,90 breaks in the data (but this can be 
-  changed- see the optional flags of the function).
-  """
-  def pos(p)   : return ordered[int(len(lst)*p)]
-  def place(x) : 
-    return int(width*float((x - lo))/(hi - lo+0.00001))
-  def pretty(lst) : 
-    return ', '.join([show % x for x in lst])
-  ordered = sorted(lst)
-  lo      = min(lo,ordered[0])
-  hi      = max(hi,ordered[-1])
-  what    = [pos(p)   for p in chops]
-  where   = [place(n) for n in  what]
-  out     = [" "] * width
-  for one,two in pairs(where):
-    for i in range(one,two): 
-      out[i] = marks[0]
-    marks = marks[1:]
-  out[int(width/2)]    = bar
-  out[place(pos(0.5))] = star 
-  return '('+''.join(out) +  ")," +  pretty(what)
-
-def _tileX() :
-  import random
-  random.seed(1)
-  nums = [random.random()**2 for _ in range(100)]
-  print(xtile(nums,lo=0,hi=1.0,width=25,show=" %5.2f"))
-  ```
+The following code, which you can use verbatim from `stats.py` does the following:
++ All treatments are recursively bi-clustered into _ranks_.
++ At each level, the treatments are split at the point where the expected
+  values of the treatments after the split is most different to before,
++ Before recursing downwards, Bootstrap+A12 is called to check that
+  that the two splits are actually different (if not: halt!)
   
-### Standard Accumulator for Numbers
-
-Note the _lt_ method: this accumulator can be sorted by median values.
-Warning: this accumulator keeps _all_ numbers. Might be better to use
-a bounded cache.
-
-```python
-class Num:
-  "An Accumulator for numbers"
-  def __init__(i,name,inits=[]): 
-    i.n = i.m2 = i.mu = 0.0
-    i.all=[]
-    i._median=None
-    i.name = name
-    i.rank = 0
-    for x in inits: i.add(x)
-  def s(i)       : return (i.m2/(i.n - 1))**0.5
-  def add(i,x):
-    i._median=None
-    i.n   += 1   
-    i.all += [x]
-    delta  = x - i.mu
-    i.mu  += delta*1.0/i.n
-    i.m2  += delta*(x - i.mu)
-  def __add__(i,j):
-    return Num(i.name + j.name,i.all + j.all)
-  def quartiles(i):
-    def p(x) : return int(g(xs[x]))
-    i.median()
-    xs = i.all
-    n  = int(len(xs)*0.25)
-    return p(n) , p(2*n) , p(3*n)
-  def median(i):
-    if not i._median:
-      i.all = sorted(i.all)
-      i._median=median(i.all)
-    return i._median
-  def __lt__(i,j):
-    return i.median() < j.median() 
-  def spread(i):
-    i.all=sorted(i.all)
-    n1=i.n*0.25
-    n2=i.n*0.75
-    if len(i.all) <= 1:
-      return 0
-    if len(i.all) == 2:
-      return i.all[1] - i.all[0]
-    else:
-      return i.all[int(n2)] - i.all[int(n1)]
-```
-
-### The A12 Effect Size Test 
-
-As above
-
-```python
-def a12slow(lst1,lst2):
-  "how often is x in lst1 more than y in lst2?"
-  more = same = 0.0
-  for x in lst1:
-    for y in lst2:
-      if    x == y : same += 1
-      elif  x >  y : more += 1
-  x= (more + 0.5*same) / (len(lst1)*len(lst2))
-  return x
-
-def a12(lst1,lst2):
-  "how often is x in lst1 more than y in lst2?"
-  def loop(t,t1,t2): 
-    while t1.j < t1.n and t2.j < t2.n:
-      h1 = t1.l[t1.j]
-      h2 = t2.l[t2.j]
-      h3 = t2.l[t2.j+1] if t2.j+1 < t2.n else None 
-      if h1>  h2:
-        t1.j  += 1; t1.gt += t2.n - t2.j
-      elif h1 == h2:
-        if h3 and h1 > h3 :
-            t1.gt += t2.n - t2.j  - 1
-        t1.j  += 1; t1.eq += 1; t2.eq += 1
-      else:
-        t2,t1  = t1,t2
-    return t.gt*1.0, t.eq*1.0
-  #--------------------------
-  lst1 = sorted(lst1, reverse=True)
-  lst2 = sorted(lst2, reverse=True)
-  n1   = len(lst1)
-  n2   = len(lst2)
-  t1   = o(l=lst1,j=0,eq=0,gt=0,n=n1)
-  t2   = o(l=lst2,j=0,eq=0,gt=0,n=n2)
-  gt,eq= loop(t1, t1, t2)
-  return gt/(n1*n2) + eq/2/(n1*n2)  >= The.a12
-
-def _a12():
-  def f1(): return a12slow(l1,l2)
-  def f2(): return a12(l1,l2)
-  for n in [100,200,400,800,1600,3200,6400]:
-    l1 = [rand() for _ in xrange(n)]
-    l2 = [rand() for _ in xrange(n)]
-    t1 = msecs(f1)
-    t2 = msecs(f2)
-    print(n, g(f1()),g(f2()),int((t1/t2)))
-```
-
-     n   a12(fast)       a12(slow)       tfast / tslow
-     --- --------------- -------------- --------------
-     100  0.53           0.53               4
-     200  0.48           0.48               6
-     400  0.49           0.49              28
-     800  0.5            0.5               26
-    1600  0.51           0.51              72
-    3200  0.49           0.49             109
-    6400  0.5            0.5              244
-
-
-## Saner Hypothesis Testing
-The following code, which you should use verbatim does the following:
-+ All treatments are clustered into _ranks_. In practice, dozens
-  of treatments end up generating just a handful of ranks.
+In practice,
++ Dozens of treatments end up generating just a handful of ranks.
 + The numbers of calls to the hypothesis tests are minimized:
     + Treatments are sorted by their median value.
     + Treatments are divided into two groups such that the
@@ -1009,151 +810,19 @@ The following code, which you should use verbatim does the following:
           + All hypothesis tests are non-parametric and include (1) effect size tests
             and (2) tests for statistically significant numbers;
           + Slow bootstraps are executed  if the faster _A12_ tests are passed;
+
 In practice, this means that the hypothesis tests (with confidence of say, 95%)
 are called on only a logarithmic number of times. So...
+
 + With this method, 16 treatments can be studied using less than _&sum;<sub>1,2,4,8,16</sub>log<sub>2</sub>i =15_ hypothesis tests  and confidence _0.99<sup>15</sup>=0.86_.
 + But if did this with the 120 all-pairs comparisons of the 16 treatments, we would have total confidence _0.99<sup>120</sup>=0.30.
-For examples on using this code, see _rdivDemo_ (below).
-```python
-def scottknott(data,cohen=The.cohen,small=The.small,useA12=The.a12 > 0, epsilon=The.epsilon):
-  """Recursively split data, maximizing delta of
-  the expected value of the mean before and 
-  after the splits. 
-  Reject splits with under 3 items"""
-  all  = reduce(lambda x,y:x+y,data)
-  same = lambda l,r: abs(l.median() - r.median()) <= all.s()*cohen
-  if useA12:
-    same = lambda l, r:   not different(l.all,r.all) 
-  big  = lambda    n: n > small
-  return rdiv(data,all,minMu,big,same,epsilon)
+For examples on using this code, run `cat statX.txt | python stats.py`.
 
-def rdiv(data,  # a list of class Nums
-         all,   # all the data combined into one num
-         div,   # function: find the best split
-         big,   # function: rejects small splits
-         same, # function: rejects similar splits
-         epsilon): # small enough to split two parts
-  """Looks for ways to split sorted data, 
-  Recurses into each split. Assigns a 'rank' number
-  to all the leaf splits found in this way. 
-  """
-  def recurse(parts,all,rank=0):
-    "Split, then recurse on each part."
-    cut,left,right = maybeIgnore(div(parts,all,big,epsilon),
-                                 same,parts)
-    if cut: 
-      # if cut, rank "right" higher than "left"
-      rank = recurse(parts[:cut],left,rank) + 1
-      rank = recurse(parts[cut:],right,rank)
-    else: 
-      # if no cut, then all get same rank
-      for part in parts: 
-        part.rank = rank
-    return rank
-  recurse(sorted(data),all)
-  return data
 
-def maybeIgnore((cut,left,right), same,parts):
-  if cut:
-    if same(sum(parts[:cut],Num('upto')),
-            sum(parts[cut:],Num('above'))):    
-      cut = left = right = None
-  return cut,left,right
+The results of a Scott-Knott+Bootstrap+A12 is a very simple
+presentation of a very complex set of results:
 
-def minMu(parts,all,big,epsilon):
-  """Find a cut in the parts that maximizes
-  the expected value of the difference in
-  the mean before and after the cut.
-  Reject splits that are insignificantly
-  different or that generate very small subsets.
-  """
-  cut,left,right = None,None,None
-  before, mu     =  0, all.mu
-  for i,l,r in leftRight(parts,epsilon):
-    if big(l.n) and big(r.n):
-      n   = all.n * 1.0
-      now = l.n/n*(mu- l.mu)**2 + r.n/n*(mu- r.mu)**2  
-      if now > before:
-        before,cut,left,right = now,i,l,r
-  return cut,left,right
+<a href="../img/result1.png"><img width=600 src="../img/results1.png"></a><br>
 
-def leftRight(parts,epsilon=The.epsilon):
-  """Iterator. For all items in 'parts',
-  return everything to the left and everything
-  from here to the end. For reasons of
-  efficiency, take a first pass over the data
-  to pre-compute and cache right-hand-sides
-  """
-  rights = {}
-  n = j = len(parts) - 1
-  while j > 0:
-    rights[j] = parts[j]
-    if j < n: rights[j] += rights[j+1]
-    j -=1
-  left = parts[0]
-  for i,one in enumerate(parts):
-    if i> 0:
-      if parts[i]._median - parts[i-1]._median > epsilon:
-        yield i,left,rights[i]
-      left += one
-```
-## Putting it All Together
-Driver for the demos:
-```pythong
-def rdivDemo(data):
-  def zzz(x):
-    return int(100 * (x - lo) / (hi - lo + 0.00001))
-  data = map(lambda lst:Num(lst[0],lst[1:]),
-             data)
-  print("")
-  ranks=[]
-  for x in scottknott(data,useA12=True):
-    ranks += [(x.rank,x.median(),x)]
-  all=[]
-  for _,__,x in sorted(ranks): all += x.all
-  all = sorted(all)
-  lo, hi = all[0], all[-1]
-  line = "----------------------------------------------------"
-  last = None
-  print(('%4s , %12s ,    %s   , %4s ' % \
-               ('rank', 'name', 'med', 'iqr'))+ "\n"+ line)
-  for _,__,x in sorted(ranks):
-    q1,q2,q3 = x.quartiles()
-    print(('%4s , %12s ,    %4s  ,  %4s ' % \
-                 (x.rank+1, x.name, q2, q3 - q1))  + \
-              xtile(x.all,lo=lo,hi=hi,width=30,show="%5.2f"))
-    last = x.rank 
-
-def _rdivs():
-  seed(1)
-  rdiv0();  rdiv1(); rdiv2(); rdiv3(); 
-  rdiv5(); rdiv6(); print("###"); rdiv7()
-
-def thing(x):
-    "Numbers become numbers; every other x is a symbol."
-    try: return int(x)
-    except ValueError:
-        try: return float(x)
-        except ValueError:
-            return x
-          
-def main():
-  log=None
-  all={}
-  now=[]
-  for line in sys.stdin:
-    for word in line.split():
-      word = thing(word)
-      if isinstance(word,str):
-        now = all[word] = all.get(word,[])
-      else:
-        now += [word]
-  rdivDemo( [ [k] + v for k,v in all.items() ] ) 
-
-if args.demo:
-  _rdivs()
-else:
-  main()
-```
-
+<a href="../img/result2.png"><img width=600 src="../img/results2.png"></a>
 
