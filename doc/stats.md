@@ -136,7 +136,7 @@ Details:
 
 ### Binary Domination
 
-Candidate one dominates candidate two...
+Candidate one dominates candidate two:
 
 - if at lease one objective score is _better_;
 - and none are _worse_.
@@ -166,16 +166,19 @@ def bdom(x, y, abouts):
 
 ### Continuous Domination
 
-Binary domination  never reports
-that that one candidate is waaaaaay more dominated that the other. It only says "true".
-Not the most informative!
+Binary domination never reports that that one candidate is waaaaaay more
+dominated that the other. It only says "true".  Not the most informative!
 
 <img width=300 src="https://s3-eu-west-1.amazonaws.com/ppreviews-plos-725668748/2119733/preview.jpg">
 
-n the above, _better_ is a little complicated. Given
-several objectives collected in _this_ and _that_,
-we consider each objective _x,y_ indivdually in _this_ and _that_
-and look at what at _loss_ if we travel from _this_ to _that_
+So that as the number of objectives increase, _bdom_ losses to _cdom_.
+
+<img width=500 src="../img/cbdom.png">
+
+What _cdom_ does is that it takes the differences between each objective, then
+raises it to a exponential factor (so those differences _SHOUT_ louder). From this we compute the mean _loss_
+as
+travel from _this_ to _that_
 versus _that_ to _this_ (and the one we prefer is the one
 that _loss_es least).
 
@@ -199,21 +202,21 @@ def better(this, that):
   y  = scores[ id(that) ]
   l1 = loss(x,y)
   l2 = loss(y,x)
-  return l1 < l2
+  return l1 < l2 # this is better than that if this losses least.
 
 def loss(x, y):
   losses= 0
   n = min(len(x),len(y))
   for i,(x1,y1) in enumerate(zip(x,y)):
-    x1 = norm(i,x1),
-    y1 = norm(i,y1)
+    x1 = norm(i,x1) # normalization
+    y1 = norm(i,y1) # normalization
     losses += expLoss( i,x1,y1,n )
-  return losses / n
+  return losses / n  # return mean loss
 
 def expLoss(i,x1,y1,n):
   "Exponentially shout out the difference"
-  w = -1 if minimizing(i) else 1
-  return -1*math.e**( w*(x1 - y1) / n )
+  w = -1 if minimizing(i) else 1 # adjust for direction of comparison
+  return -1*math.e**( w*(x1 - y1) / n ) # raise the differences to some exponent
 ```  
 		
 The test that one optimizer is better than another can be recast as four
