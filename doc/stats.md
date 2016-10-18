@@ -14,17 +14,22 @@ _______
 
 Your task:
 
-1. Download [stats0.txt](https://github.com/txt/ase16/blob/master/src/stats0.txt)
-2. Dowbload [stats.py](https://github.com/txt/ase16/blob/master/src/stats.py)
-3. Read the following down to (and including the section "Medians").
-4. Then try the following exercise:
-       - Look at the data in stats0.txt
-       - Sort them by their median
-       - Draw percentile charts for each
+1. Download
+      - [stats0.txt](https://github.com/txt/ase16/blob/master/src/stats0.txt)
+      - [stat2.txt](https://github.com/txt/ase16/blob/master/src/stat2.txt)
+      - [stat4.py](https://github.com/txt/ase16/blob/master/src/stat4.py)
+      - [stats.py](https://github.com/txt/ase16/blob/master/src/stats.py)
+2. Read the following down to (and including the section "Medians").
+3. Read the code in `stat4.py`. What is going on there? Run   
+   `python stat4.py | python stats.py`  and comment if you
+   agree or disagree with the output.
+4. Repeat  the following exercise for `stat2.txt`, then `stats0.txt`
+       - Look at the data in stats0.txt;
+       - Sort them by their median;
+       - Draw percentile charts for each (no need to be super accurate, near enough is good enough);
        - Do any of these seven groups cluster together?
        - When you have answers to all the above (and not before), compare your results to   
-         `cat stats0.txt | python stats.py --text 30`
-
+         `cat statX.txt | python stats.py --text 30`
 
 # Theory
 
@@ -270,6 +275,9 @@ def expLoss(i,x1,y1,n):
 
 ## Compare Measures
 
+
+### Visualize the Data 
+
 To compare  if one optimizer is better than another, apply the followng rules:
 
 1.  Visualize the data, somehow.
@@ -279,8 +287,7 @@ To compare  if one optimizer is better than another, apply the followng rules:
     *small effect*.
 4.  Check if the distributions are *significantly different*;
 
-### Visualize the Data 
-
+That is:
 
 When faced with new data, always chant the following mantra:
 
@@ -360,6 +367,15 @@ BTW, there are [_many_ more ways to view results](http://www.tableau.com/about/b
 
 ### Medians
 
+To compare  if one optimizer is better than another, apply the followng rules:
+
+1.  Visualize the data, somehow.
+2.  <b>Check if the central tendency of one distribution is *better* than
+    the other; e.g. compare their median values.</b>
+3.  Check the different between the central tendencies is not some
+    *small effect*.
+4.  Check if the distributions are *significantly different*;
+
 All things considered,
 means do not mean much, especially for highly skewed distributions.
 For example:
@@ -387,6 +403,15 @@ If the list size is even, the median is the two values either side of the middle
 
 ### Check for "Small Effects"
 
+To compare  if one optimizer is better than another, apply the followng rules:
+
+1.  Visualize the data, somehow.
+2.  Check if the central tendency of one distribution is *better* than
+    the other; e.g. compare their median values.
+3.  <b>Check the different between the central tendencies is not some
+    *small effect*.</b>
+4.  Check if the distributions are *significantly different*;
+
 An _effect size_ test is a sanity check that can be summarizes as follows:
 
 -  Don't  sweat the small stuff; 
@@ -395,10 +420,50 @@ I.e. ignore small differences between items in the samples.
 
 There parametric and non-parametric tests for "small effects" (which, if we find, we should just ignore).
 
-Parametric tests assume that the numbers fit int
+Parametric tests assume that the numbers fit some simple distribution (e.g. the normal Gaussian curve).
+
+#### Cohen's rule:
+
+- compare means _&Delta; = &mu;1-&mu;2_ between two samples;
+- compute the standard deviation &sigma; of the combined samples;
+- large effect if &Delta; &lt; 0.5*&sigma;
+- medium effect if &Delta; &lt; 0.3*&sigma;
+- small effect if &Delta; &lt; 0.1*&sigma;; And "small effect" means "yawn", too small to be interesting.
+
+Widely viewed as too simplistic.
+
+#### Hedge's rule (using _g_):
+
+- Still parametric
+- Modifies &Delta; w.r.t. the standard deviation of both samples.
+- Adds a correction factor _c_ for small sample sizes.
+- In their review of use of effect size in SE, Kampenses et al. report that many papers use something like _g &lt; 0.38_
+  is the boundary between _small effects_ and bigger effects.
+        - [ Systematic Review of Effect Size in
+Software Engineering Experiments ](https://pdfs.semanticscholar.org/e6be/263f60ccfb294e14422f0e0162b1367063a2.pdf)
+          Kampenes, Vigdis By, et al.  Information and Software Technology 49.11 (2007): 1073-1086.
+        - See equations 2,3,4 and Figure 9
+
+```python
+def hedges(i,j,small=0.38):
+    """
+    Hedges effect size test.
+    Returns true if the "i" and "j" difference is only a small effect.
+    "i" and "j" are   objects reporing mean (i.mu), standard deviation (i.s) 
+    and size (i.n) of two  population of numbers.
+    """
+    num   = (i.n - 1)*i.s**2 + (j.n - 1)*j.s**2
+    denom = (i.n - 1) + (j.n - 1)
+    sp    = ( num / denom )**0.5
+    delta = abs(i.mu - j.mu) / sp  
+    c     = 1 - 3.0 / (4*(i.n + j.n - 2) - 1)
+    return delta * c < small
+```    
+
+#### A12
 
 My
-preferred test for *small effect* has:
+preferred test for *small effect* is
 
 -   a simple intuition;
 -   which makes no assumptions about (say) Gaussian assumptions;
@@ -433,9 +498,9 @@ between two populations is:
 A naive version of this code is shown here in the _ab12slow_ function. While simple to
 code, this _ab12slow_ function runs in polynomial time (since for each item in _lst1_,
 it runs over all of _lst2_):
+
 ```python
-def _ab12():
-  def a12slow(lst1,lst2):
+def a12slow(lst1,lst2):
     more = same = 0.0
     for x in sorted(lst1):
       for y in sorted(lst2):
@@ -444,113 +509,41 @@ def _ab12():
         elif x > y : 
           more += 1
     return (more + 0.5*same) / (len(lst1)*len(lst2))
-  random.seed(1)
-  l1 = [random.random() for x in range(5000)]
-  more = [random.random()*2 for x in range(5000)]
-  l2 = [random.random()  for x in range(5000)]
-  less = [random.random()/2.0 for x in range(5000)]
-  for tag, one,two in [("1less",l1,more), 
-                       ("1more",more,less),("same",l1,l2)]:
-    t1  = msecs(lambda : a12(l1,less))
-    t2  = msecs(lambda : a12slow(l1,less))
-    print("\n",tag,"\n",t1,a12(one,two))
-    print(t2, a12slow(one,two))
 ```
-Note that the test code \__ab12_ shows that our fast and slow method generate the same A12 score, but the
-fast way does so thousands of times faster. The following tests show runtimes for lists of 5000 numbers:
 
-      experimemt  msecs(fast)  a12(fast)  msecs(slow)  a12(slow)
-      1less          13        0.257      9382           0.257  
-      1more          20        0.868      9869           0.868
-      same           11        0,502      9937           0.502
-
-
-
-So look at the data before
-making, possibly bogus, inferences from it. For example, here are some
-charts showing the effects on a population as we apply more and more of
-some treatment. Note that the mean of the populations remains unchanged,
-yet we might still endorse the treatment since it reduces the
-uncertainty associated with each population.
-
-![img](https://raw.githubusercontent.com/txt/mase/master/img/index_customers_clip_image002.jpg)
-
-Note that 2 and 3 and 4 must be all be true to assert that one thing
-generates better numbers than another.  For example, one bogus
-conclusion would be to just check median values (step2) and ignore
-steps3 and steps4. _BAD IDEA_. Medians can be very misleading unless
-you consider the overall distributions (as done in step3 and step4).
-
-(As an aside, note that the above requests a check for _median_,
-not _mean_. This is required since,In practice, step2,step3,step4 are
-listed in increasing order of effort (e.g. the _bootstrap sample_ method
-discussed later in this subject is an example of step4, and this
-can take a while to compute). So pragmatically, it is useful
-to explore the above in the order step1 then step2 then step3 then step4 (and _stopping_
-along the way if any part fails). For example, 
-one possible bogus inference would be to apply step4 without
-the step3 since if the *small effect* test fails, then the third
-*significance* test is misleading.
-
-For example, returning to the above distributions, note the large
-overlap in the top two curves in those plots. When distributions exhibit
-a very large overlap, it is very hard to determine if one is really
-different to the other. So large variances can mean that even if the
-means are *better*, we cannot really say that the values in one
-distribution are usually better than the other.
-
-### Step1: Visualization
-
-
-
-#### Xtile
-
-### Step2: Check Medians
-
-The median of a list is the middle item of the sorted values, if the list is of an odd size.
-If the list size is even, the median is the two values either side of the middle:
-
-    def median(lst,ordered=False):
-      lst = lst if ordered else sorted(lst)
-      n   = len(lst)
-      p   = n // 2
-      if (n % 2):  return lst[p]
-      p,q = p-1,p
-      q   = max(0,(min(q,n)))
-      return (lst[p] + lst[q]) * 0.5
-
-### Step3: Effect size
-
-
-# Software for Statistics
-
-- Parametric statistical test is one that makes assumptions about the parameters
-  (defining properties) of the population distribution(s) from which one's data
-  are drawn;
-     - E.g. assuming data falls into a "normal" bell-shape curve
-- While a non-parametric test is one that makes no such assumptions.
-
-Parametrics can run faster (since non-parametric methods often require
-sorting and sampling raw data).
-
-## Visualization
-
-Before we do stats, lets g
-et some visuals going:
-
-[Chirp](https://www.cs.uic.edu/~tdang/file/CHIRP-KDD.pdf)
-
-
-## Utilities
-
-See [stats.py](https://github.com/dotninjas/dotninjas.github.io/blob/master/ninja/stats.py).
-
+Here's a faster version taht sorts the lists first
 
 ```python
-from __future__ import division,print_function
-import sys,random, argparse
-sys.dont_write_bytecode=True
+def a12(lst1,lst2):
+  "how often is x in lst1 more than y in lst2?"
+  def loop(t,t1,t2): 
+    while t1.j < t1.n and t2.j < t2.n:
+      h1 = t1.l[t1.j]
+      h2 = t2.l[t2.j]
+      h3 = t2.l[t2.j+1] if t2.j+1 < t2.n else None 
+      if h1>  h2:
+        t1.j  += 1; t1.gt += t2.n - t2.j
+      elif h1 == h2:
+        if h3 and h1 > h3 :
+            t1.gt += t2.n - t2.j  - 1
+        t1.j  += 1; t1.eq += 1; t2.eq += 1
+      else:
+        t2,t1  = t1,t2
+    return t.gt*1.0, t.eq*1.0
+  #--------------------------
+  lst1 = sorted(lst1, reverse=True)
+  lst2 = sorted(lst2, reverse=True)
+  n1   = len(lst1)
+  n2   = len(lst2)
+  t1   = o(l=lst1,j=0,eq=0,gt=0,n=n1)
+  t2   = o(l=lst2,j=0,eq=0,gt=0,n=n2)
+  gt,eq= loop(t1, t1, t2)
+  return gt/(n1*n2) + eq/2/(n1*n2)  >= The.a12
+```
 
+The above uses a helper class:
+
+```python
 class o():
   "Anonymous container"
   def __init__(i,**fields) : 
@@ -564,182 +557,235 @@ class o():
   def show(i):
     return [k for k in sorted(i.__dict__.keys()) 
             if not "_" in k]
-
-The=o(cohen=0.3, small=3, epsilon=0.01,
-      width=50,lo=0,hi=100,conf=0.01,b=1000,a12=0.56)
-
-parser = argparse.ArgumentParser(
-  description="Apply Scott-Knot test to data read from standard input")
-
-p=parser.add_argument
-
-p("--demo",    default=False, action="store_true")
-p("--cohen",   type=float, default=0.3,  metavar='N', help="too small if delta less than N*std of the data)")
-p("--small",   type=int,   default=3,   metavar="N", help="too small if hold less than N items")
-p("--epsilon", type=float, default=0.01, metavar="N", help="a range is too small of its hi - lo < N")
-p("--width",   type=int,   default=50,   metavar="N", help="width of quintile display")
-p("--conf",    type=float, default=0.01, metavar="N", help="bootstrap tests with confidence 1-n")
-p("--a12",     type=float, default=0.56, metavar="N", help="threshold for a12 test: disable,small,med,large=0,0.56,0.64,0.71") 
-
-args = parser.parse_args()
-The.cohen = args.cohen
-The.small = args.small
-The.epsilon = args.epsilon
-The.conf = args.conf
-The.width = args.width + 0
-The.a12  = args.a12 + 0
 ```
 
-# Analysis of Experimental Data
+The following code benchmarks slow and fast a12:
 
-This page is about the non-parametric statistical tests. It is also a chance for us to discuss a little
-statistical theory.
+```
+def _ab12():  
+  random.seed(1)
+  l1 = [random.random() for x in range(5000)]
+  more = [random.random()*2 for x in range(5000)]
+  l2 = [random.random()  for x in range(5000)]
+  less = [random.random()/2.0 for x in range(5000)]
+  for tag, one,two in [("1less",l1,more), 
+                       ("1more",more,less),("same",l1,l2)]:
+    t1  = msecs(lambda : a12(l1,less))
+    t2  = msecs(lambda : a12slow(l1,less))
+    print("\n",tag,"\n",t1,a12(one,two))
+    print(t2, a12slow(one,two))
+```
 
-## Before we begin...
+Note that the test code \+_ab12_ shows that our fast and slow method generate
+the same A12 score, but the fast way does so thousands of times faster. The
+following tests show runtimes for lists of 5000 numbers:
 
-Imagine the following example contain objective scores gained from different optimizers
-_x1,x2,x3,x4,...etc_. Which results are ranked one, two, three etc...
+      experimemt  msecs(fast)  a12(fast)  msecs(slow)  a12(slow)
+      1less          13        0.257      9382           0.257  
+      1more          20        0.868      9869           0.868
+      same           11        0,502      9937           0.502
 
-### Lesson Zero
+Endorsed in the SE literature:
 
-Some differences are obvious
+- Andrea Arcuri and Lionel Briand. 2011. A practical guide for using statistical tests to assess randomized algorithms in software engineering. In Proceedings of the 33rd International Conference on Software Engineering (ICSE '11). ACM, New York, NY, USA, 1-10. DOI=http://dx.doi.org/10.1145/1985793.1985795
+
+#### Cliff's Delta
+
+Is non-parametric, like A12. Not yet endorsed in the SE literature.
+But it should be!
+
+A12 counts _bigger_ and _same_.
+
+Cliff's delta counts _bigger_ and _smaller_.
 
 ```python
-def rdiv0():
-  rdivDemo([
-        ["x1",0.34, 0.49, 0.51, 0.6],
-        ["x2",6,  7,  8,  9] ])
+def cliffsDelta(lst1, lst2, small=0.147): # assumes all samples are nums
+    "Cliff's delta between two list of numbers i,j."
+    lt = gt = 0
+    for x in lst1:
+      for y in lst2 :
+        if x > y: gt += 1
+        if x < y: lt += 1
+    z = (lt + gt) / (len(lst1) * len(lst2))
+    return z < small # true is small effect in difference
 ```
 
-     rank ,         name ,    med   ,  iqr 
-     ----------------------------------------------------
-       1 ,           x1 ,      51  ,    11 (*              |              ), 0.34,  0.49,  0.51,  0.51,  0.60
-       2 ,           x2 ,     800  ,   200 (               |   ----   *-- ), 6.00,  7.00,  8.00,  8.00,  9.00
+As above, could be optimized with a pre-sort.
 
-### Lesson One
+### Statistically Significantly Different
 
-Some similarities are obvious...
+To compare  if one optimizer is better than another, apply the followng rules:
 
+1.  Visualize the data, somehow.
+2.  Check if the central tendency of one distribution is *better* than
+    the other; e.g. compare their median values.
+3.  Check the different between the central tendencies is not some
+    *small effect*.
+4.  <b>Check if the distributions are *significantly different*;</b>
+
+In any experiment or observation that involves drawing a sample from a
+population, there is always the possibility that an observed effect would have
+occurred due to sampling error alone.
+
+A _significance_ test checks that the observed effect is not due to noise, to
+degree of certainty "c".
+
+Note that the term _significance_ does not imply _importance_ and the term
+statistical significance is not the same as research, theoretical, or practical
+significance. To go from signficance to importance, we should:
+
+- at least
+check for the abscence of small effects shown above _and_ the _rank_ tests
+shown below
+- at most ask a domain expert if the observed difference matters a hoot.
+
+
+For example, here are some
+charts showing the effects on a population as we apply more and more of
+some treatment. Note that the mean of the populations remains unchanged,
+yet we might still endorse the treatment since it reduces the
+uncertainty associated with each population.
+
+![img](https://raw.githubusercontent.com/txt/mase/master/img/index_customers_clip_image002.jpg)
+
+Note the large
+overlap in the top two curves in those plots. When distributions exhibit
+a very large overlap, it is very hard to determine if one is really
+different to the other. So large variances can mean that even if the
+means are *better*, we cannot really say that the values in one
+distribution are usually better than the other.
+
+My preferred test for statistical significance is the bootstrap.
+
+#### Bootstrap
+
+The following _bootstrap_ method was introduced in
+1979 by Bradley Efron at Stanford University. It
+was inspired by earlier work on the
+jackknife.
+Improved estimates of the variance were [developed later][efron01].  
+[efron01]: http://goo.gl/14n8Wf "Bradley Efron and R.J. Tibshirani. An Introduction to the Bootstrap (Chapman & Hall/CRC Monographs on Statistics & Applied Probability), 1993"
+
+To check if two populations _(y0,z0)_
+are different, many times sample with replacement
+from both to generate _(y1,z1), (y2,z2), (y3,z3)_.. etc.
 
 ```python
-def rdiv1():
-  rdivDemo([
-        ["x1",0.1,  0.2,  0.3,  0.4],
-        ["x2",0.1,  0.2,  0.3,  0.4],
-        ["x3",6,  7,  8,  9] ])
+def sampleWithReplacement(lst):
+  "returns a list same size as list"
+  def any(n)  : return random.uniform(0,n)
+  def one(lst): return lst[ int(any(len(lst))) ]
+  return [one(lst) for _ in lst]
 ```
-        
-      rank ,         name ,    med   ,  iqr 
-      ----------------------------------------------------
-         1 ,           x1 ,      30  ,    20 (*              |              ), 0.10,  0.20,  0.30,  0.30,  0.40
-         1 ,           x2 ,      30  ,    20 (*              |              ), 0.10,  0.20,  0.30,  0.30,  0.40
-         2 ,           x3 ,     800  ,   200 (               |   ----   *-- ), 6.00,  7.00,  8.00,  8.00,  9.00
 
-### Lesson Two
+Then, for all those samples,
+ check if some *testStatistic* in the original pair
+hold for all the other pairs. If it does more than (say) 99%
+of the time, then we are 99% confident in that the
+populations are the same.
 
-Many results often clump into less-than-many ranks.
-
+In such a _bootstrap_ hypothesis test, the *some property*
+is the difference between the two populations, muted by the
+joint standard deviation of the populations.
 
 ```python
-def rdiv2():
-  rdivDemo([
-        ["x1",0.34, 0.49, 0.51, 0.6],
-        ["x2",0.6,  0.7,  0.8,  0.9],
-        ["x3",0.15, 0.25, 0.4,  0.35],
-        ["x4",0.6,  0.7,  0.8,  0.9],
-        ["x5",0.1,  0.2,  0.3,  0.4] ])
+def testStatistic(y,z): 
+    """Checks if two means are different, tempered
+     by the sample size of 'y' and 'z'"""
+    tmp1 = tmp2 = 0
+    for y1 in y.all: tmp1 += (y1 - y.mu)**2 
+    for z1 in z.all: tmp2 += (z1 - z.mu)**2
+    s1    = (float(tmp1)/(y.n - 1))**0.5
+    s2    = (float(tmp2)/(z.n - 1))**0.5
+    delta = z.mu - y.mu
+    if s1+s2:
+      delta =  delta/((s1/y.n + s2/z.n)**0.5)
+    return delta
 ```
 
-      rank ,         name ,    med   ,  iqr 
-      ----------------------------------------------------
-         1 ,           x5 ,      30  ,    20 (---    *---    |              ), 0.10,  0.20,  0.30,  0.30,  0.40
-         1 ,           x3 ,      35  ,    15 ( ----    *-    |              ), 0.15,  0.25,  0.35,  0.35,  0.40
-         2 ,           x1 ,      51  ,    11 (        ------ *--            ), 0.34,  0.49,  0.51,  0.51,  0.60
-         3 ,           x2 ,      80  ,    20 (               |  ----    *-- ), 0.60,  0.70,  0.80,  0.80,  0.90
-         3 ,           x4 ,      80  ,    20 (               |  ----    *-- ), 0.60,  0.70,  0.80,  0.80,  0.90
+The rest is just details:
 
-### Lesson Three
-   
-Some results even clump into one rank (the great null result).
++ Efron advises
+  to make the mean of the populations the same (see
+  the _yhat,zhat_ stuff shown below).
++ The class _total_ is a just a quick and dirty accumulation class.
++ For more details see [the Efron text][efron01].  
 
 ```python
-def rdiv3():
-  rdivDemo([
-      ["x1",101, 100, 99,   101,  99.5],
-      ["x2",101, 100, 99,   101, 100],
-      ["x3",101, 100, 99.5, 101,  99],
-      ["x4",101, 100, 99,   101, 100] ])
+def bootstrap(y0,z0,conf=The.conf,b=The.b):
+  """The bootstrap hypothesis test from
+     p220 to 223 of Efron's book 'An
+    introduction to the boostrap."""
+  class total():
+    "quick and dirty data collector"
+    def __init__(i,some=[]):
+      i.sum = i.n = i.mu = 0 ; i.all=[]
+      for one in some: i.put(one)
+    def put(i,x):
+      i.all.append(x);
+      i.sum +=x; i.n += 1; i.mu = float(i.sum)/i.n
+    def __add__(i1,i2): return total(i1.all + i2.all)
+  y, z   = total(y0), total(z0)
+  x      = y + z
+  tobs   = testStatistic(y,z)
+  yhat   = [y1 - y.mu + x.mu for y1 in y.all]
+  zhat   = [z1 - z.mu + x.mu for z1 in z.all]
+  bigger = 0.0
+  for i in range(b):
+    if testStatistic(total(sampleWithReplacement(yhat)),
+                     total(sampleWithReplacement(zhat))) > tobs:
+      bigger += 1
+  return bigger / b < conf
 ```
+Examples
+```python
+def _bootstraped(): 
+  def worker(n=1000,
+             mu1=10,  sigma1=1,
+             mu2=10.2, sigma2=1):
+    def g(mu,sigma) : return random.gauss(mu,sigma)
+    x = [g(mu1,sigma1) for i in range(n)]
+    y = [g(mu2,sigma2) for i in range(n)]
+    return n,mu1,sigma1,mu2,sigma2,\
+        'different' if bootstrap(x,y) else 'same'
+  # very different means, same std
+  print(worker(mu1=10, sigma1=10, 
+               mu2=100, sigma2=10))
+  # similar means and std
+  print(worker(mu1= 10.1, sigma1=1, 
+               mu2= 10.2, sigma2=1))
+  # slightly different means, same std
+  print(worker(mu1= 10.1, sigma1= 1, 
+               mu2= 10.8, sigma2= 1))
+  # different in mu eater by large std
+  print(worker(mu1= 10.1, sigma1= 10, 
+               mu2= 10.8, sigma2= 1))
+```
+Output:
+```python
+#_bootstraped()
 
-     rank ,         name ,    med   ,  iqr 
-     ----------------------------------------------------
-        1 ,           x1 ,    10000  ,   150 (-------       *|              ),99.00, 99.50, 100.00, 101.00, 101.00
-        1 ,           x2 ,    10000  ,   100 (--------------*|              ),99.00, 100.00, 100.00, 101.00, 101.00
-        1 ,           x3 ,    10000  ,   150 (-------       *|              ),99.00, 99.50, 100.00, 101.00, 101.00
-        1 ,           x4 ,    10000  ,   100 (--------------*|              ),99.00, 100.00, 100.00, 101.00, 101.00
-
-
-#### Lesson Four
-
-Heh? Where's  lesson four?
-
-### Lesson Five
-
-Some things had better clump to one thing (sanity check for the ranker).
-
+(1000, 10, 10, 100, 10, 'different')
+(1000, 10.1, 1, 10.2, 1, 'same')
+(1000, 10.1, 1, 10.8, 1, 'different')
+(1000, 10.1, 10, 10.8, 1, 'same')
+```
+Warning- the above took 8 seconds to generate since we used 1000 bootstraps.
+As to how many bootstraps are enough, that depends on the data. There are
+results saying 200 to 400 are enough but, since I am  suspicious man, I run it for 1000.
+Which means the runtimes associated with bootstrapping is a significant issue.
+To reduce that runtime, I avoid things like an all-pairs comparison of all treatments
+(see below: Scott-knott).  Also, BEFORE I do the boostrap, I first run
+the effect size test (and only go to bootstrapping in effect size passes:
 
 ```python
-def rdiv5():
-  rdivDemo([
-      ["x1",11,11,11],
-      ["x2",11,11,11],
-      ["x3",11,11,11]])
+def different(l1,l2):
+  #return bootstrap(l1,l2) and a12(l2,l1)
+  return a12(l2,l1) and bootstrap(l1,l2)
+
 ```
 
-      rank ,         name ,    med   ,  iqr 
-      ----------------------------------------------------
-         1 ,           x1 ,    1100  ,     0 (*              |              ),11.00, 11.00, 11.00, 11.00, 11.00
-         1 ,           x2 ,    1100  ,     0 (*              |              ),11.00, 11.00, 11.00, 11.00, 11.00
-         1 ,           x3 ,    1100  ,     0 (*              |              ),11.00, 11.00, 11.00, 11.00, 11.00
-
-### Lesson Six
-
-Some things had better clump to one thing (sanity check for the ranker).
-
-```python
-def rdiv6():
-  rdivDemo([
-      ["x1",11,11,11],
-      ["x2",11,11,11],
-      ["x4",32,33,34,35]])
-```
-
-     rank ,         name ,    med   ,  iqr 
-     ----------------------------------------------------
-        1 ,           x1 ,    1100  ,     0 (*              |              ),11.00, 11.00, 11.00, 11.00, 11.00
-        1 ,           x2 ,    1100  ,     0 (*              |              ),11.00, 11.00, 11.00, 11.00, 11.00
-        2 ,           x4 ,    3400  ,   200 (               |          - * ),32.00, 33.00, 34.00, 34.00, 35.00
-
-### Lesson Seven
-
-All the above scales to succinct summaries of hundreds, thousands, millions of numbers
-
-```python
-def rdiv7():
-  rdivDemo([
-    ["x1"] +  [rand()**0.5 for _ in range(256)],
-    ["x2"] +  [rand()**2   for _ in range(256)],
-    ["x3"] +  [rand()      for _ in range(256)]
-  ])
-```
-
-     rank ,         name ,    med   ,  iqr 
-     ----------------------------------------------------
-        1 ,           x2 ,      25  ,    50 (--     *      -|---------     ), 0.01,  0.09,  0.25,  0.47,  0.86
-        2 ,           x3 ,      49  ,    47 (  ------      *|   -------    ), 0.08,  0.29,  0.49,  0.66,  0.89
-        3 ,           x1 ,      73  ,    37 (         ------|-    *   ---  ), 0.32,  0.57,  0.73,  0.86,  0.95
-
-## So, How to Rank?
+#### Scott-Knott So, How to Rank?
 
 For the most part, we are concerned with very high-level issues that
 strike to the heart of the human condition:
@@ -950,132 +996,7 @@ def _a12():
     3200  0.49           0.49             109
     6400  0.5            0.5              244
 
-## Non-Parametric Hypothesis Testing
 
-The following _bootstrap_ method was introduced in
-1979 by Bradley Efron at Stanford University. It
-was inspired by earlier work on the
-jackknife.
-Improved estimates of the variance were [developed later][efron01].  
-[efron01]: http://goo.gl/14n8Wf "Bradley Efron and R.J. Tibshirani. An Introduction to the Bootstrap (Chapman & Hall/CRC Monographs on Statistics & Applied Probability), 1993"
-
-To check if two populations _(y0,z0)_
-are different, many times sample with replacement
-from both to generate _(y1,z1), (y2,z2), (y3,z3)_.. etc.
-
-```python
-def sampleWithReplacement(lst):
-  "returns a list same size as list"
-  def any(n)  : return random.uniform(0,n)
-  def one(lst): return lst[ int(any(len(lst))) ]
-  return [one(lst) for _ in lst]
-```
-
-Then, for all those samples,
- check if some *testStatistic* in the original pair
-hold for all the other pairs. If it does more than (say) 99%
-of the time, then we are 99% confident in that the
-populations are the same.
-
-In such a _bootstrap_ hypothesis test, the *some property*
-is the difference between the two populations, muted by the
-joint standard deviation of the populations.
-
-```python
-def testStatistic(y,z): 
-    """Checks if two means are different, tempered
-     by the sample size of 'y' and 'z'"""
-    tmp1 = tmp2 = 0
-    for y1 in y.all: tmp1 += (y1 - y.mu)**2 
-    for z1 in z.all: tmp2 += (z1 - z.mu)**2
-    s1    = (float(tmp1)/(y.n - 1))**0.5
-    s2    = (float(tmp2)/(z.n - 1))**0.5
-    delta = z.mu - y.mu
-    if s1+s2:
-      delta =  delta/((s1/y.n + s2/z.n)**0.5)
-    return delta
-```
-
-The rest is just details:
-
-+ Efron advises
-  to make the mean of the populations the same (see
-  the _yhat,zhat_ stuff shown below).
-+ The class _total_ is a just a quick and dirty accumulation class.
-+ For more details see [the Efron text][efron01].  
-
-```python
-def bootstrap(y0,z0,conf=The.conf,b=The.b):
-  """The bootstrap hypothesis test from
-     p220 to 223 of Efron's book 'An
-    introduction to the boostrap."""
-  class total():
-    "quick and dirty data collector"
-    def __init__(i,some=[]):
-      i.sum = i.n = i.mu = 0 ; i.all=[]
-      for one in some: i.put(one)
-    def put(i,x):
-      i.all.append(x);
-      i.sum +=x; i.n += 1; i.mu = float(i.sum)/i.n
-    def __add__(i1,i2): return total(i1.all + i2.all)
-  y, z   = total(y0), total(z0)
-  x      = y + z
-  tobs   = testStatistic(y,z)
-  yhat   = [y1 - y.mu + x.mu for y1 in y.all]
-  zhat   = [z1 - z.mu + x.mu for z1 in z.all]
-  bigger = 0.0
-  for i in range(b):
-    if testStatistic(total(sampleWithReplacement(yhat)),
-                     total(sampleWithReplacement(zhat))) > tobs:
-      bigger += 1
-  return bigger / b < conf
-```
-#### Examples
-```python
-def _bootstraped(): 
-  def worker(n=1000,
-             mu1=10,  sigma1=1,
-             mu2=10.2, sigma2=1):
-    def g(mu,sigma) : return random.gauss(mu,sigma)
-    x = [g(mu1,sigma1) for i in range(n)]
-    y = [g(mu2,sigma2) for i in range(n)]
-    return n,mu1,sigma1,mu2,sigma2,\
-        'different' if bootstrap(x,y) else 'same'
-  # very different means, same std
-  print(worker(mu1=10, sigma1=10, 
-               mu2=100, sigma2=10))
-  # similar means and std
-  print(worker(mu1= 10.1, sigma1=1, 
-               mu2= 10.2, sigma2=1))
-  # slightly different means, same std
-  print(worker(mu1= 10.1, sigma1= 1, 
-               mu2= 10.8, sigma2= 1))
-  # different in mu eater by large std
-  print(worker(mu1= 10.1, sigma1= 10, 
-               mu2= 10.8, sigma2= 1))
-```
-Output:
-```python
-#_bootstraped()
-
-(1000, 10, 10, 100, 10, 'different')
-(1000, 10.1, 1, 10.2, 1, 'same')
-(1000, 10.1, 1, 10.8, 1, 'different')
-(1000, 10.1, 10, 10.8, 1, 'same')
-```
-Warning- the above took 8 seconds to generate since we used 1000 bootstraps.
-As to how many bootstraps are enough, that depends on the data. There are
-results saying 200 to 400 are enough but, since I am  suspicious man, I run it for 1000.
-Which means the runtimes associated with bootstrapping is a significant issue.
-To reduce that runtime, I avoid things like an all-pairs comparison of all treatments
-(see below: Scott-knott).  Also, BEFORE I do the boostrap, I first run
-the effect size test (and only go to bootstrapping in effect size passes:
-```python
-def different(l1,l2):
-  #return bootstrap(l1,l2) and a12(l2,l1)
-  return a12(l2,l1) and bootstrap(l1,l2)
-
-```
 ## Saner Hypothesis Testing
 The following code, which you should use verbatim does the following:
 + All treatments are clustered into _ranks_. In practice, dozens
