@@ -79,7 +79,7 @@ Calculating spread:
   their nearest neighbor
   - Then:
   
-<img width=400 src="../img/spreadcalc.png">
+<img width=300 src="../img/spreadcalc.png">
 
 - If all data is maximally spread, then all distances _d<sub>i</sub>_ are near mean d
 which would make _&Delta;=0_ ish.
