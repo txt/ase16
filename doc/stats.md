@@ -43,7 +43,7 @@ In the following 2d optimization space, which optimizer do you like?
 
 - Hint: we want to minimize dollars and maximize Q(W)
 
-<img width=500 src="http://thermalscienceapplication.asmedigitalcollection.asme.org/data/Journals/JTSEBV/934703/tsea_008_02_021022_f005.png)">
+<img width=500 src="http://thermalscienceapplication.asmedigitalcollection.asme.org/data/Journals/JTSEBV/934703/tsea_008_02_021022_f005.png">
 
 The volume inside the paretor frontiers is called the _hypervolume_ and the optimizer
 we like has the greatest _hypervolume_ (in this case, the green). Note that there
@@ -79,7 +79,7 @@ Calculating spread:
   their nearest neighbor
   - Then:
   
-<img width=500 src="../img/spreadcacle.png">
+<img width=500 src="../img/spreadcalc.png">
 
 - If all data is maximally spread, then all distances _d<sub>i</sub>_ are near mean d
 which would make _&Delta;=0_ ish.
@@ -136,13 +136,41 @@ Details:
 
 ### Binary Domination
 
+Candidate one dominates candidate two...
+
+- if at lease one objective score is _better_;
+- and none are _worse_.
+
+Note that in the following, each objective knows if it wants to be minimized or maximized.
+
+```python
+def more(x,y): return x > y
+def less(x,y): return x < y
+```
+
+e.g. `objective1.better = more` or `objective2.better = less`  then call the following.
+
+
+```python
+def bdom(x, y, abouts):
+  "multi objective"
+  x = abouts.objs(x)
+  y = abouts.objs(y)
+  betters = 0
+  for obj in abouts._objs:
+    x1,y1 = x[obj.pos], y[obj.pos]
+    if obj.better(x1,y1) : betters += 1
+    elif x1 != y1: return False # must be worse, go quit
+  return betters > 0
+```
+
 ### Continuous Domination
 
 Binary domination  never reports
 that that one candidate is waaaaaay more dominated that the other. It only says "true".
 Not the most informative!
 
-
+<img width=300 src="https://s3-eu-west-1.amazonaws.com/ppreviews-plos-725668748/2119733/preview.jpg">
 
 n the above, _better_ is a little complicated. Given
 several objectives collected in _this_ and _that_,
