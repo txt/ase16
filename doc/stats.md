@@ -14,11 +14,16 @@ _______
 
 Your task:
 
-1. Download [stats.txt](https://github.com/txt/ase16/blob/master/src/stats.txt)
+1. Download [stats0.txt](https://github.com/txt/ase16/blob/master/src/stats0.txt)
 2. Dowbload [stats.py](https://github.com/txt/ase16/blob/master/src/stats.py)
 3. Read the following down to (and including the section "Medians").
 4. Then try the following exercise:
-       - Look at the data in stats.txt
+       - Look at the data in stats0.txt
+       - Sort them by their median
+       - Draw percentile charts for each
+       - Do any of these seven groups cluster together?
+       - When you have answers to all the above (and not before), compare your results to   
+         `cat stats0.txt | python stats.py --text 30`
 
 
 # Theory
@@ -351,6 +356,7 @@ As before, the median value, shown with a star and
  the point half-way
 between min and max (in this case, 0.5) is shown as a vertical bar.
 
+BTW, there are [_many_ more ways to view results](http://www.tableau.com/about/blog/2013/7/list-books-about-data-visualisation-24182) than just percentiles
 
 ### Medians
 
@@ -389,6 +395,7 @@ I.e. ignore small differences between items in the samples.
 
 There parametric and non-parametric tests for "small effects" (which, if we find, we should just ignore).
 
+Parametric tests assume that the numbers fit int
 
 My
 preferred test for *small effect* has:
