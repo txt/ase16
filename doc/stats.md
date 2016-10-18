@@ -10,11 +10,16 @@
 
 _______
 
+# What Optimizer is Best?
 
-# Starter exercise:
+Your task:
 
 1. Download [stats.txt](https://github.com/txt/ase16/blob/master/src/stats.txt)
 2. Dowbload [stats.py](https://github.com/txt/ase16/blob/master/src/stats.py)
+3. Read the following down to (and including the section "Medians").
+4. Then try the following exercise:
+       - Look at the data in stats.txt
+
 
 # Theory
 
@@ -269,7 +274,7 @@ To compare  if one optimizer is better than another, apply the followng rules:
     *small effect*.
 4.  Check if the distributions are *significantly different*;
 
-### Visualize the Data
+### Visualize the Data 
 
 
 When faced with new data, always chant the following mantra:
@@ -317,6 +322,7 @@ shows 2000 numbers on two lines:
     percentile.
 -   Dashes (*"-"*) mark the range (10,30)th and (70,90)th percentiles;
 -   White space marks the ranges (30,50)th and (50,70)th percentiles.
+
 Consider two distributions, of 1000 samples each: one shows square root
 of a *rand()* and the other shows the square of a *rand()*.
 
@@ -327,7 +333,7 @@ of a *rand()* and the other shows the square of a *rand()*.
         14:           return xtile(lst,lo=0, hi=1,width=25,
         15:                        show= lambda s:" %3.2f" % s)
         16:         print "one", show([r()*0.5 for x in range(1000)])
-        17:         print "two", show([r()2   for x in range(1000)])
+        17:         print "two", show([r()*2   for x in range(1000)])
 
 In the following quintile charts, we show these distributions:
 
@@ -341,79 +347,50 @@ Note the brevity of the display:
      two --    *     |--------    , 0.01,  0.10,  0.27,  0.51,  0.85
 
     
-As before, the median value, shown with a *"\*"*; and the point half-way
-between min and max (in this case, 0.5) is shown as a vertical bar
-*"|"*.
+As before, the median value, shown with a star and
+ the point half-way
+between min and max (in this case, 0.5) is shown as a vertical bar.
 
 
+### Medians
 
-So look at the data before
-making, possibly bogus, inferences from it. For example, here are some
-charts showing the effects on a population as we apply more and more of
-some treatment. Note that the mean of the populations remains unchanged,
-yet we might still endorse the treatment since it reduces the
-uncertainty associated with each population.
-
-![img](https://raw.githubusercontent.com/txt/mase/master/img/index_customers_clip_image002.jpg)
-
-Note that 2 and 3 and 4 must be all be true to assert that one thing
-generates better numbers than another.  For example, one bogus
-conclusion would be to just check median values (step2) and ignore
-steps3 and steps4. _BAD IDEA_. Medians can be very misleading unless
-you consider the overall distributions (as done in step3 and step4).
-
-(As an aside, note that the above requests a check for _median_,
-not _mean_. This is required since, all things considered,
+All things considered,
 means do not mean much, especially for highly skewed distributions.
-For example, Bill Gates and 35 homeless people are in the same room.
-Their mean annual income is over a billion dollars each- which is
-a number that characterized neither Mr. Gates or the homeless people.
+For example:
 
-On the other hand, the median income of that population is close to zero-
-which is a number that characterizes most of that population. )
-In practice, step2,step3,step4 are
-listed in increasing order of effort (e.g. the _bootstrap sample_ method
-discussed later in this subject is an example of step4, and this
-can take a while to compute). So pragmatically, it is useful
-to explore the above in the order step1 then step2 then step3 then step4 (and _stopping_
-along the way if any part fails). For example, 
-one possible bogus inference would be to apply step4 without
-the step3 since if the *small effect* test fails, then the third
-*significance* test is misleading.
+- Bill Gates and 35 homeless people are in the same room.
+- Their mean annual income is over a billion dollars each- which is
+  a number that characterized neither Mr. Gates or the homeless people.
+- On the other hand, the median income of that population is close to zero-
+  which is a number that characterizes most of that population. 
 
-For example, returning to the above distributions, note the large
-overlap in the top two curves in those plots. When distributions exhibit
-a very large overlap, it is very hard to determine if one is really
-different to the other. So large variances can mean that even if the
-means are *better*, we cannot really say that the values in one
-distribution are usually better than the other.
-
-### Step1: Visualization
-
-
-
-#### Xtile
-
-### Step2: Check Medians
 
 The median of a list is the middle item of the sorted values, if the list is of an odd size.
 If the list size is even, the median is the two values either side of the middle:
 
     def median(lst,ordered=False):
-      lst = lst if ordered else sorted(lst)
-      n   = len(lst)
-      p   = n // 2
-      if (n % 2):  return lst[p]
-      p,q = p-1,p
-      q   = max(0,(min(q,n)))
-      return (lst[p] + lst[q]) * 0.5
+       lst = lst if ordered else sorted(lst)
+       n   = len(lst)
+       p   = n // 2
+       if (n % 2):  return lst[p]
+       p,q = p-1,p
+       q   = max(0,(min(q,n)))
+       return (lst[p] + lst[q]) * 0.5
 
-### Step3: Effect size
+
+
+### Check for "Small Effects"
 
 An _effect size_ test is a sanity check that can be summarizes as follows:
-* Don't  sweat the small stuff; 
+
+-  Don't  sweat the small stuff; 
+
 I.e. ignore small differences between items in the samples.
- My
+
+There parametric and non-parametric tests for "small effects" (which, if we find, we should just ignore).
+
+
+My
 preferred test for *small effect* has:
 
 -   a simple intuition;
@@ -479,6 +456,63 @@ fast way does so thousands of times faster. The following tests show runtimes fo
       1less          13        0.257      9382           0.257  
       1more          20        0.868      9869           0.868
       same           11        0,502      9937           0.502
+
+
+
+So look at the data before
+making, possibly bogus, inferences from it. For example, here are some
+charts showing the effects on a population as we apply more and more of
+some treatment. Note that the mean of the populations remains unchanged,
+yet we might still endorse the treatment since it reduces the
+uncertainty associated with each population.
+
+![img](https://raw.githubusercontent.com/txt/mase/master/img/index_customers_clip_image002.jpg)
+
+Note that 2 and 3 and 4 must be all be true to assert that one thing
+generates better numbers than another.  For example, one bogus
+conclusion would be to just check median values (step2) and ignore
+steps3 and steps4. _BAD IDEA_. Medians can be very misleading unless
+you consider the overall distributions (as done in step3 and step4).
+
+(As an aside, note that the above requests a check for _median_,
+not _mean_. This is required since,In practice, step2,step3,step4 are
+listed in increasing order of effort (e.g. the _bootstrap sample_ method
+discussed later in this subject is an example of step4, and this
+can take a while to compute). So pragmatically, it is useful
+to explore the above in the order step1 then step2 then step3 then step4 (and _stopping_
+along the way if any part fails). For example, 
+one possible bogus inference would be to apply step4 without
+the step3 since if the *small effect* test fails, then the third
+*significance* test is misleading.
+
+For example, returning to the above distributions, note the large
+overlap in the top two curves in those plots. When distributions exhibit
+a very large overlap, it is very hard to determine if one is really
+different to the other. So large variances can mean that even if the
+means are *better*, we cannot really say that the values in one
+distribution are usually better than the other.
+
+### Step1: Visualization
+
+
+
+#### Xtile
+
+### Step2: Check Medians
+
+The median of a list is the middle item of the sorted values, if the list is of an odd size.
+If the list size is even, the median is the two values either side of the middle:
+
+    def median(lst,ordered=False):
+      lst = lst if ordered else sorted(lst)
+      n   = len(lst)
+      p   = n // 2
+      if (n % 2):  return lst[p]
+      p,q = p-1,p
+      q   = max(0,(min(q,n)))
+      return (lst[p] + lst[q]) * 0.5
+
+### Step3: Effect size
 
 
 # Software for Statistics
