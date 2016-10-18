@@ -445,9 +445,74 @@ distribution are usually better than the other.
 In any case, what a signifcance test does is report how small
 is the overlap between two distributions (and if it is very small,
 then we say the differences are _statistically significant_.
-My preferred test for statistical significance is the bootstrap.
 
-#### Bootstrap
+#### T-test (parametric Significance Test)
+
+Assuming the populations are bell-shaped curve, when are two curves not significantly
+different?
+
+```python
+class Num:
+  "An Accumulator for numbers"
+  def __init__(i,inits=[]): 
+    i.n = i.m2 = i.mu = 0.0
+    for x in inits: i.add(x)
+  def s(i): return (i.m2/(i.n - 1))**0.5
+  def add(i,x):
+    i._median=None
+    i.n   += 1  
+    delta  = x - i.mu
+    i.mu  += delta*1.0/i.n
+    i.m2  += delta*(x - i.mu)
+  def tTestSame(i,j,conf=0.95):
+    nom   = abs(i.mu - j.mu)
+    s1,s2 = i.s(), j.s()
+    denom = ((s1/i.n + s2/j.n)**0.5) if s1+s2 else 1
+    df    = min(i.n - 1, j.n - 1)
+    return  criticalValue(df, conf) >= nom/denom
+```
+
+The above needs a magic threshold )(on the last line) for sayng enough is enough 
+
+```python
+def criticalValue(df,conf=0.95,
+  xs= [	         1,	    2,	   5,	   10,	  15,	   20,    25,	  30,	    60,	 100],
+  ys= {0.9:  [ 3.078, 1.886, 1.476, 1.372, 1.341, 1.325, 1.316, 1.31,  1.296, 1.29], 
+       0.95: [ 6.314, 2.92,  2.015, 1.812, 1.753, 1.725, 1.708, 1.697, 1.671, 1.66], 
+       0.99: [31.821, 6.965, 3.365, 2.764, 2.602, 2.528, 2.485, 2.457, 2.39,  2.364]}):
+  return interpolate(df, xs, ys[conf])
+
+def interpolate(x,xs,ys):
+  if x <= xs[0] : return ys[0]
+  if x >= xs[-1]: return ys[-1]
+  x0, y0 = xs[0], ys[0]
+  for x1,y1 in zip(xs,ys):  
+    if x < x0 or x > xs[-1] or x0 <= x < x1:
+      break
+    x0, y0 = x1, y1
+  gap = (x - x0)/(x1 - x0)
+  return y0 + gap*(y1 - y0)
+```
+
+Many distributions are not normal so I use this `tTestSame` as a heuristic for
+speed criticl calcs. E.g. in the inner inner loop of some search where i need a
+quick opinion, is "this" the same as "that".
+
+But when assessing experimental results after all the algorithms have terminated, I use a much
+safer, but somewhat slower, procedure:
+
+#### Bootstrap (Non-parametric Significance Test)
+
+The world is not normal:
+
+<img src="../img/notnorm4.png"><br>
+<img src="../img/notnorm1.png"><br>
+<img src="../img/notnorm2.png"><br>
+<img src="../img/notnorm6.png"><br>
+<img src="../img/notnorm5.png"><br>
+<img src="../img/notnorm8.png">
+
+So, when the world is a funny shape, what to do?
 
 The following _bootstrap_ method was introduced in
 1979 by Bradley Efron at Stanford University. It
@@ -457,7 +522,7 @@ Improved estimates of the variance were [developed later][efron01].
 [efron01]: http://goo.gl/14n8Wf "Bradley Efron and R.J. Tibshirani. An Introduction to the Bootstrap (Chapman & Hall/CRC Monographs on Statistics & Applied Probability), 1993"
 
 To check if two populations _(y0,z0)_
-are different, many times sample with replacement
+are different using the bootstrap, many times sample with replacement
 from both to generate _(y1,z1), (y2,z2), (y3,z3)_.. etc.
 
 ```python
