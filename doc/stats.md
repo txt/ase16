@@ -112,11 +112,11 @@ optimal known?
         yes:
           count how often each one dominates another
           select candidates that dominate the most
-            selection > "N"
-              no: use selection
-              yes:
-                sort descending by cubiod distance around them
-                use first 1.."N"
+          selection > "N"
+            no: use selection
+            yes:
+              sort descending by cubiod distance around them
+              use first 1.."N"
         no:
           sort each, ascending, from the sum of its losses to all other
           use first "N"
