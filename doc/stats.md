@@ -419,7 +419,29 @@ degree of certainty "c".
 
 Note that the term _significance_ does not imply _importance_ and the term
 statistical significance is not the same as research, theoretical, or practical
-significance. To go from signficance to importance, we should:
+significance. For example:
+
+- Code can be developed by local teams or distributed teams spread
+  around the world.
+- It turns out the bug rate of these two methods is
+  statistically significantly different.
+- But the size of the different is about zero (as detected by the Hedge's test,
+  shown below).
+- From Ekrem Kocaguneli, Thomas Zimmermann, Christian Bird, Nachiappan Nagappan, and Tim
+  Menzies. 2013. Distributed development considered harmful?. In Proceedings of the 2013
+  International Conference on Software Engineering (ICSE '13). IEEE Press, Piscataway,
+  NJ, USA, 882-890.
+
+<img src="../img/bugs.png"><br>
+
+For these reasons, standard statistical tests are coming under fire:
+
+- Various high profile journals are banning the use  the
+  null hypothesis significance testing procedure (NHSTP) (a classic statistical
+  significance test) from their articles [1](https://www.r-bloggers.com/why-the-ban-on-p-values-and-what-now/), [2](http://www.tandfonline.com/doi/pdf/10.1080/01973533.2015.1012991), [3](https://en.wikipedia.org/wiki/Statistical_hypothesis_testing#Criticism)
+  
+
+To go from signficance to importance, we should:
 
 - at least
 check for the abscence of small effects shown above _and_ the _rank_ tests
