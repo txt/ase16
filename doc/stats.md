@@ -320,14 +320,14 @@ shows 2000 numbers on two lines:
 Consider two distributions, of 1000 samples each: one shows square root
 of a *rand()* and the other shows the square of a *rand()*.
 
-       10:       def _tile() :
-       11:         import random
-       12:         r = random.random
-       13:         def show(lst):
-       14:           return xtile(lst,lo=0, hi=1,width=25,
-       15:                        show= lambda s:" %3.2f" % s)
-       16:         print "one", show([r()*0.5 for x in range(1000)])
-       17:         print "two", show([r()2   for x in range(1000)])
+        10:       def _tile() :
+        11:         import random
+        12:         r = random.random
+        13:         def show(lst):
+        14:           return xtile(lst,lo=0, hi=1,width=25,
+        15:                        show= lambda s:" %3.2f" % s)
+        16:         print "one", show([r()*0.5 for x in range(1000)])
+        17:         print "two", show([r()2   for x in range(1000)])
 
 In the following quintile charts, we show these distributions:
 
