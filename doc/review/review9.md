@@ -24,6 +24,7 @@ ______
 5. List the Drawbacks of IGD
 6. What is the primary drawback in binary domination(BDOM).
 7. How does continuous domination(CDOM) overcome the defecits of BDOM.
+8. How would you compare multiple optimizers
 
 ## Practice
 
