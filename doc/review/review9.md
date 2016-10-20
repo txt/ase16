@@ -24,7 +24,12 @@ ______
 5. List the Drawbacks of IGD
 6. What is the primary drawback in binary domination(BDOM).
 7. How does continuous domination(CDOM) overcome the defecits of BDOM.
-8. How would you compare multiple optimizers
+8. How would you compare multiple optimizers?
+9. Why would you choose median over mean?
+1. How are non-parametric tests different from parametric tests?
+10. What is the cohen's rule for significance.
+1. Explain the A12 test.
+2. List the steps involved in bootstrap
 
 ## Practice
 
