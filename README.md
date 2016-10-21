@@ -70,6 +70,7 @@ of search-based optimization for exploring models
 0. <a href="https://github.com/txt/fss16/blob/master/doc/reading12345678.md">Reading12345678</a>
 
 </td><td valign=top xwidth="100px">
+7. <a href="doc/hw789.md">hw789</a><br>
 6. <a href="doc/hw6.md">hw6</a><br>
 5. <a href="doc/hw5.md">hw5</a><br>
 4. <a href="doc/hw4.md">hw4</a><br>
