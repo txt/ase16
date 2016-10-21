@@ -57,7 +57,8 @@ of search-based optimization for exploring models
 
      </td>
      <td valign=top  xwidth="100px">
-
+     11. <a href="doc/stats.md">Stats</a><br>
+10. <a href="doc/perform.md">Performance</a><br>
 9. <a href="doc/pso.md">Particle Swarms</a><br>
 8. <a href="doc/de.md">Differential Evolution</a><br>
 7. <a href="doc/mws.md">MaxWalkSat</a><br>
@@ -79,6 +80,7 @@ of search-based optimization for exploring models
 1. <a href="doc/hw1.md">hw1</a>
 
      </td><td valign=top xwidth="100px">
+9. <a href="doc/review/review9.md"> review9</a><br>
 8. <a href="doc/review/review8.md"> review8</a><br>
 7. <a href="doc/review/review7.md"> review7</a><br>
 6. <a href="doc/review/review6.md"> review6</a><br>

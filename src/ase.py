@@ -1235,7 +1235,7 @@ def de(abouts=Fonseca(), better=bdom, sb=None,s0=None):
            frontier=frontier)
 
 def igds(models,opts):
-  subs=400
+  subs=100
   def sampleFrontier0(abouts):
     tmp = abouts()
     return [tmp.decsObjs() for _ in xrange(THE.pop0)]
@@ -1254,6 +1254,7 @@ def igds(models,opts):
         tmp        = finalFrontier(abouts,opt)
         some[opt] += tmp
         for one in tmp: all.add(one)
+
     dot(">1",True)
     abouts1=abouts()
     all = all._some
@@ -1261,9 +1262,9 @@ def igds(models,opts):
     all = reference(all,abouts1)
     things= {}
     dot(">2",True)
+    tbl = abouts1.table(all)
     for opt in some:
       things[opt] = Thing(opt)
-      tbl  = abouts1.table(all)
       mine = Sample([tbl(row) for row in some[opt]],max=subs)._some
       dot(">3[%s] " % len(mine),True)
       for row in mine:
@@ -1606,7 +1607,7 @@ def _pom3():
   p=Pom3().decsObjs()
 
 #_pom3()
-  
+
 if THE.run:
   f= eval("lambda : %s()" %THE.run)
   ok(f())
