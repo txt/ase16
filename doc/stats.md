@@ -84,6 +84,18 @@ When faced with new data, always chant the following mantra:
 That is, it is *strong recommended* that, prior doing any statistical
 work, an analyst generates a visualization of the data.
 
+(And some even say, do not do stats at all:
+
+- "If you need statistics, you did the wrong experiment." -- Enrest Rutherford.)
+
+Sometimes, visualizations are enough:
+
+- [CHIRP: A new classifier based on
+Composite Hypercubes on Iterated Random Projections](https://www.cs.uic.edu/~tdang/file/CHIRP-KDD.pdf) 
+- [Simpler Questions Can Lead To Better Insights](https://github.com/ds4se/chapters/blob/master/turhanb/theGraph.md), from
+  Perspectives on Data Science for Software Engineering, Morgan-Kaufmann, 2015
+
+
 Percentile
 charts a simple way to display very large populations in very little
 space.
