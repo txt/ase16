@@ -11,7 +11,7 @@
 
 ______
 
-# NSGA-II, SPEA2
+# NSGA-II, SPEA2, and Others
 
 Problem: How to find cull many solutions, with multiple objectives
 
@@ -24,6 +24,9 @@ History: 1990s: NSGA, NPGA, MOGA
 
 All had some high computation times.
 
+![](../img/rankvscountvsdepth.png)
+
+![](../img/rankvsdepth.png)
 
 ## NSGA-II (fast, approximate, non-dominating sort)
 
@@ -137,9 +140,80 @@ Algorithm:
 ![spea2](../img/spea2.png)
 
 
-## And which is Better?
+
+
+## IBEA
+
+
+GA + continuous domination.
+
+After mutation, down select as follows:
+
+1. Remove an individual that losses most
+2. If pop still too big, goto step 1.
+
+### Works Quite Well
 
 ![img](../img/sayyad13.png)
 
+## Epsilon Dominance
+
+Simple. Under-used. Two populations:
+
+- a _population_ of hastily-built, simplistically analyzed candidates
+- an _archive_ containing best-in-show.
+
+![](../img/epsilon.png)
 
 
+**Main loop**
+
+0. Build a _population_ at random, then:
+1. Using bdom, build an _archive_ from the nondomnated parts of _population_
+     -  For _"o"_ objectives, build an _"o"_ dimensional chessboard where the
+        objectives are divided into steps of size
+        &epsilon; (some domain-specfic "near enough is good enough" number, gathered from the users);
+     -  Precompute and cache what cells dominate the other in _dom[i] = [j1,j2,j3..]_;
+     -  Mark all archive cells as "undominated".
+     -  For all _"c"_ in nondominated( _population_) call _fastdom(c)_.
+2. Using two random items _p1,p2_ from _population_
+      - select the one _"p"_ that bdom dominates (or, if none, either at random)
+3. Pick a random item _"a"_ from the archive
+4. Create a _candidate_ called _"c"_ from _p,a_ (using crossover and mutation)
+5. Add _"c"_ to the _population_, removing one item _p3_, selected as follows:
+       - Searching in random order, if _"c"_ bdom's "_p3_" from _population_, delete _"p3"_ and goto step6
+       - If _"c"_ dominates nothing, delete anything at random
+6. Add _"c"_ to archive using _fastdom(c)_.
+7. If current solutions good enough, then return _archive_.
+8. If evaluation budget exhausted, then return _archive_,
+9. Else, got to step2.
+
+**Fastdom(c)**  (fast way to build Pareto frontier in the archive, my name)
+
+Here, the chessboard has cells and cells have only one member.
+
+![](../img/caseabcd.png)
+
+Case (a): ff "_c_" goes into a "dominated" cell then delete "_c_"
+
+Case (b,d): if "_c_" goes into an unoccupoed "undominated" _cell[i]_, follow the _dom[i]_  links.
+
+- for all _j &epsilon; dom[i]_
+- if _cell[j]_ is "undominated"
+- then mark it "dominated" and recurse on  _dom[j]_.
+
+Case (c): if "_c_" goes into an occupied cell, then delete either _"c"_ or the occupant as follows:
+
+- delete  "_c_" f dominated by the occupant (using bdom);
+- else delete occupant if "_c"_ dominated occupant (using bdom)
+- else delete the one furthest  from "heaven" (Euclidean distance to Utopian point)
+
+
+
+## MOEA/D
+
+Serious cool.
+
+See [MOEA/D](https://docs.google.com/presentation/d/1f8CDrMFDKhkeKYoXiIenqwDKNUvEULrwfLEYZA-nHH0/edit)
+     
+## Others
