@@ -50,7 +50,7 @@ BUt how do you finds the bands? And what is crowd-pruning?
 + Keep frontier1, frontier2, frontier3... till frontieri gives you too many items
 + Sort frontieri by secondary ranking method, prune the lower ones
 
-![nsgaii](img/nsgaii.png)
+![nsgaii](../img/nsgaii.png)
 
 Primary rankings: sort by how many things you dominate:
 
@@ -65,7 +65,7 @@ Primary rankings: sort by how many things you dominate:
      + If upstream counter == 0
            + then _Q_ belongs in frontier i
 
-![sort](img/sort.png)
+![sort](../img/sort.png)
 
 Secondary ranking (only applied to the "too much"
 frontier that cross "over the line").
@@ -83,7 +83,7 @@ Find an approximation to the cuboid space around around each
 + Sort candidates by _I<sub>p</sub>_
   + Discard the smaller ones. 
 
-![cubioid](img/cuboid.png)
+![cubioid](../img/cuboid.png)
   
 
 Officially faster. Strange to say, no runtimes in the famous
@@ -134,12 +134,12 @@ Functions:
 
 Algorithm:
 
-![spea2](img/spea2.png)
+![spea2](../img/spea2.png)
 
 
 ## And which is Better?
 
-![img](img/sayyad13.png)
+![img](../img/sayyad13.png)
 
 
 
