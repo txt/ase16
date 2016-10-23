@@ -216,4 +216,3 @@ Serious cool.
 
 See [MOEA/D](https://docs.google.com/presentation/d/1f8CDrMFDKhkeKYoXiIenqwDKNUvEULrwfLEYZA-nHH0/edit)
      
-## Others
