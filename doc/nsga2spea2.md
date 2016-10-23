@@ -168,7 +168,13 @@ After mutation, down select as follows:
 
 _Kalyanmoy Deb, Manikanth Mohan, and Shikhar Mishra. 2005. Evaluating the ε-Domination Based Multi-Objective Evolutionary Algorithm for a Quick Computation of Pareto-Optimal Solutions. Evol. Comput. 13, 4 (December 2005), 501-525. DOI=http://dx.doi.org/10.1162/106365605774666895_
 
-Simple. Under-used. Two populations:
+Simple. Under-used.
+[Some studies
+say](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.75.1674&rep=rep1&type=pdf)
+it works better than NSGA-II (which is potentially slower).
+
+
+Two populations:
 
 - a _population_ of hastily-built, simplistically analyzed candidates
 - an _archive_ containing best-in-show.
