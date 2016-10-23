@@ -30,11 +30,11 @@ All had some high computation times.
 
 ## NSGA-II (fast, approximate, non-dominating sort)
 
-K. Deb, A. Pratap, S. Agarwal, and
+<em>K. Deb, A. Pratap, S. Agarwal, and
 T. Meyarivan. 2002.
 [A fast and elitist multiobjective genetic algorithm: NSGA-II](http://www.iitk.ac.in/kangal/Deb_NSGA-II.pdf). Trans. Evol. Comp
 6, 2 (April 2002),
-182-197. DOI=http://dx.doi.org/10.1109/4235.996017
+182-197. DOI=http://dx.doi.org/10.1109/4235.996017</em>
 
 Cited by: 15,300+ papers
 
@@ -99,17 +99,17 @@ BYW, NSGA-II's author has recently released NSGA-II for _many_ objective problem
 
 ## SPEA2: Improving the Strength Pareto Evolutionary Algorithm
 
-(The following notes come for the excellent website [Clever Algorithms](http://www.cleveralgorithms.com/nature-inspired/evolution/spea.html).)
-
-SPEA2:
-[Improving the Strength Pareto Evolutionary Algorithm for Multiobjective Optimization](http://e-collection.library.ethz.ch/eserv/eth:24689/eth-24689-01.pdf)
+<em>[Improving the Strength Pareto Evolutionary Algorithm for Multiobjective Optimization](http://e-collection.library.ethz.ch/eserv/eth:24689/eth-24689-01.pdf)
 Eckart Zitzler, Marco Laumanns, Lothar Thiele,
 Evolutionary Methods for Design, Optimization and
 Control with Applications to Industrial
 Problems. Proceedings of the
-EUROGEN'2001. Athens. Greece, September 19-21
+EUROGEN'2001. Athens. Greece, September 19-21</em>
 
 Cited by 4774.
+
+(The following notes come for the excellent website [Clever Algorithms](http://www.cleveralgorithms.com/nature-inspired/evolution/spea.html).)
+
 
 
 Again, a genetic algorithm (crossover, mutate) with a novel select operator.
@@ -144,6 +144,14 @@ Algorithm:
 
 ## IBEA
 
+<em>Indicator-Based Selection in Multiobjective Search
+Eckart Zitzler, Simon Künzli,
+in Parallel Problem Solving from Nature,
+Volume 3242 of the series Lecture Notes in Computer Science pp 832-842, 2004,
+http://dx.doi.org/10.1007/978-3-540-30217-9_84"</em>
+
+
+
 
 GA + continuous domination.
 
@@ -157,6 +165,8 @@ After mutation, down select as follows:
 ![img](../img/sayyad13.png)
 
 ## Epsilon Dominance
+
+_Kalyanmoy Deb, Manikanth Mohan, and Shikhar Mishra. 2005. Evaluating the ε-Domination Based Multi-Objective Evolutionary Algorithm for a Quick Computation of Pareto-Optimal Solutions. Evol. Comput. 13, 4 (December 2005), 501-525. DOI=http://dx.doi.org/10.1162/106365605774666895_
 
 Simple. Under-used. Two populations:
 
