@@ -405,7 +405,7 @@ def cliffsDelta(lst1, lst2, small=0.147): # assumes all samples are nums
       for y in lst2 :
         if x > y: gt += 1
         if x < y: lt += 1
-    z = (lt + gt) / (len(lst1) * len(lst2))
+    z = abs(lt - gt) / (len(lst1) * len(lst2))
     return z < small # true is small effect in difference
 ```
 
