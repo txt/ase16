@@ -46,19 +46,19 @@ of search-based optimization for exploring models
 <td align=center><img src="img/news.png">
 </td>  
 
-     <td align=center><img src="img/lectures.gif">
-     </td><td align=center><img src="img/homework.png">
-     </td><td align=center><img src="img/review.gif">
-     </td><td align=center><img width=64 src="img/workshop.png">
-     </td><td align=center><img width=64 src="img/books.png">
-     </td> </tr>
-     <tr>
-     <td valign=top  xwidth="100px">
+<td align=center><img src="img/lectures.gif">
+</td><td align=center><img src="img/homework.png">
+</td><td align=center><img src="img/review.gif">
+</td><td align=center><img width=64 src="img/workshop.png">
+</td><td align=center><img width=64 src="img/books.png">
+</td> </tr>
+<tr>
+ <td valign=top  xwidth="100px">
 
-     </td>
-     <td valign=top  xwidth="100px">
-     12. <a href="doc/nsga2spea2.md">Other algorithms</a><br>
-     11. <a href="doc/stats.md">Stats</a><br>
+</td>
+<td valign=top  xwidth="100px">
+12. <a href="doc/nsga2spea2.md">Other algorithms</a><br>
+11. <a href="doc/stats.md">Stats</a><br>
 10. <a href="doc/perform.md">Performance</a><br>
 9. <a href="doc/pso.md">Particle Swarms</a><br>
 8. <a href="doc/de.md">Differential Evolution</a><br>
@@ -93,14 +93,14 @@ of search-based optimization for exploring models
 1. <a href="doc/review/review1.md"> review1</a><br>
 0. <a href="doc/review/review0.md"> review0</a>
 
-     </td><td valign=top xwidth="100px">
-         4. <a href="https://github.com/ase16-ta/performance">ws4</a><br>
-         3. <a href="https://github.com/ase16-ta/pom3-ga">ws3</a><br>
-         2. <a href="https://github.com/ase16-ta/fsms">ws2</a><br>
-         1. <a href="https://github.com/ase16-ta/ga">ws1</a><br>
-     </td><td valign=top>
+ </td><td valign=top xwidth="100px">
+4. <a href="https://github.com/ase16-ta/performance">ws4</a><br>
+ 3. <a href="https://github.com/ase16-ta/pom3-ga">ws3</a><br>
+2. <a href="https://github.com/ase16-ta/fsms">ws2</a><br>
+1. <a href="https://github.com/ase16-ta/ga">ws1</a><br>
+</td><td valign=top>
 
-     </td>
+</td>
 </tr></table>
 
 
